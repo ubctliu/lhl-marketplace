@@ -10,6 +10,18 @@ const router  = express.Router();
 
 router.get('/', (req, res) => {
   res.render('users');
-}); 
+});
+
+router.get('/signin', (req, res) => {
+  res.render('signin');
+});
+
+router.post('/signin', (req, res) => {
+  
+});
+
+router.get('/createaccount', (req, res) => {
+  res.render('createaccount');
+});
 
 module.exports = router;
