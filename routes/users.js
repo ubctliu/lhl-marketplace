@@ -20,4 +20,8 @@ router.post('/signin', (req, res) => {
   
 });
 
+router.get('/createaccount', (req, res) => {
+  res.render('createaccount');
+});
+
 module.exports = router;
