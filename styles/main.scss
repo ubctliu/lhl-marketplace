@@ -44,11 +44,25 @@ nav {
     padding: 0em 0em 0em 93em;
   }
 
-  #drop-down-menu {
+  #dropdown-menu {
     font-size: 1.5em;
     padding: 0em 0em 0em 2.5em;
     &:hover {
       cursor: pointer;
+    }
+
+    #dropdown-menu-content {
+        display: none;
+        position: absolute;
+        background-color: #b4afaf;
+        z-index: 1;
+        padding: 0em 1em 0em 0em;
+        font-size: medium;
+    }
+
+    #dropdown-menu-content a {
+      color: black;
+      // display: block;
     }
   }
 }
