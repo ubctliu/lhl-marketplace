@@ -31,8 +31,8 @@ nav {
       cursor: pointer;
     }
   }
-
-  #links {
+  
+  .links {
     position: absolute;
     padding: 0em 0em 0em 0em;
   }
@@ -44,11 +44,15 @@ nav {
     padding: 0em 0em 0em 93em;
   }
 
-  #dropdown-menu {
-    font-size: 1.5em;
+  .dropdown-menu {
+    display: flex;
+    align-items: center;
     padding: 0em 0em 0em 2.5em;
-    &:hover {
-      cursor: pointer;
+    #dropdown-menu-icon {
+      font-size: 1.5em;
+      &:hover {
+        cursor: pointer;
+      }
     }
 
     #dropdown-menu-content {
