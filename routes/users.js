@@ -12,4 +12,12 @@ router.get('/', (req, res) => {
   res.render('users');
 });
 
+router.get('/signin', (req, res) => {
+  res.render('signin');
+});
+
+router.post('/signin', (req, res) => {
+  
+});
+
 module.exports = router;

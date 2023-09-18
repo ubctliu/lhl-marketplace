@@ -1,0 +1,70 @@
+nav {
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+  color: #000000;
+  background-color: #FFFFFF;
+  padding: 1.5em;
+  height: 75px;
+  box-sizing: border-box;
+  position: fixed;
+  z-index: 1;
+  top: 0;
+  width: 100%;
+
+  #logo {
+    display: flex;
+    position: absolute;
+    align-items: flex-end;
+    flex-direction: column;
+    padding: 0em 25em 0em 45.5em;
+    font-size: 1.15em;
+    :hover {
+      cursor: pointer;
+    }
+  }
+  
+  .links {
+    position: absolute;
+    padding: 0em 0em 0em 0em;
+  }
+
+  .menu-options {
+    display: flex;
+    align-items: flex-end;
+    flex-direction: row;
+    padding: 0em 0em 0em 93em;
+
+    #sign-in {
+      &:hover {
+        cursor: pointer;
+      }
+    }
+  }
+
+  .dropdown-menu {
+    display: flex;
+    align-items: center;
+    padding: 0em 0em 0em 2.5em;
+    #dropdown-menu-icon {
+      font-size: 1.5em;
+      &:hover {
+        cursor: pointer;
+      }
+    }
+
+    #dropdown-menu-content {
+        display: none;
+        position: absolute;
+        background-color: #b4afaf;
+        z-index: 1;
+        padding: 0em 1em 0em 0em;
+        font-size: medium;
+    }
+
+    #dropdown-menu-content a {
+      color: black;
+      // display: block;
+    }
+  }
+}

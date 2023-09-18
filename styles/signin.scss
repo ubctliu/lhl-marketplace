@@ -1,0 +1,26 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #F2DA9C;
+  // min-height: 100vh;
+}
+
+.signin {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 15em 0em 0em 0em;
+
+  label, input, input {
+  font-size: medium;
+  display: block;
+  margin-bottom: 10px;
+  }
+
+  a {
+    text-decoration: none;
+  }
+}
+
