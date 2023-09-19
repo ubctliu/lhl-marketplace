@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="/vendor/border-box.css" />
   <link rel="stylesheet" href="/styles/main.css" />
   <link rel="stylesheet" href="/styles/nav.css" />
+  <link rel="stylesheet" href="/styles/listings.css" />
   <link rel="stylesheet" href="/styles/layout.css" />
 
   <!-- Font Awesome -->
@@ -19,14 +20,15 @@
 
   <script src="/vendor/jquery-3.0.0.js"></script>
   <script defer src="/scripts/app.js"></script>
+  <script defer src="/scripts/listings.js"></script>
 </head>
 <%- include('partials/_nav') %>
 
     <div class="featured">
       <span id="featured-logo"><b>FEATURED</b></span>
-      <div class="featured-product"></div>
+      <section class="featured-listings"></section>
     </div>
-    <div class="product"></div>
+    <section class="listings"></section>
 </body>
 
 </html>
