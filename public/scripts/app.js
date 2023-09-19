@@ -7,7 +7,7 @@ const createListingElement = (listing) => {
   const $listing = `<article class="listing">
         <header>
         <img src=${listing.image_url}></img>
-          <h3>${listing.title}</h3>
+          <h3>${listing.title} - $${listing.price}</h3>
           <span class="seller-name">${listing.first_name} ${listing.last_name}</span>
         </header>
           <p class="listing-description">${escape(listing.description)}</p>
@@ -24,7 +24,7 @@ const createFeaturedListingElement = (listing) => {
   const $listing = `<article class="featured-listing">
         <header>
         <img src=${listing.image_url}></img>
-          <h3>${listing.title}</h3>
+          <h3>${listing.title} - $${listing.price}</h3>
           <span class="seller-name">${listing.first_name} ${listing.last_name}</span>
         </header>
           <p class="listing-description">${escape(listing.description)}</p>
@@ -51,6 +51,7 @@ const renderFeaturedListings = (listings) => {
   }
 };
 
+
 $(document).ready(() => {
   // hide drop-down menu on load
   $("#dropdown-menu-content").hide();
@@ -59,6 +60,8 @@ $(document).ready(() => {
     .done(listings => {
       renderListings(listings);
     });
+
+  $.get("/listings/refeature");
 
   $.get("/listings/featured")
     .done(listings => {

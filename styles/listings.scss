@@ -2,13 +2,23 @@
   display: flex;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
   .listing {
     img {
       height: 240px;
       width: 240px;
+      border-radius: 25px;
+      &:hover {
+      cursor: pointer;
     }
+    }
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #F2F2F2;
   }
-  background-color: #F2F2F2;
+  max-width: 1800px;
+  background-color: #f2f2f2e7;
 }
 
 .featured-listings {
@@ -19,6 +29,14 @@
     img {
       height: 240px;
       width: 240px;
+      border-radius: 25px;
+      &:hover {
+        cursor: pointer;
+      }
     }
+    margin-left: auto;
+    margin-right: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
 }
