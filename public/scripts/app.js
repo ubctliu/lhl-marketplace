@@ -7,6 +7,7 @@ const createListingElement = (listing) => {
   const $listing = `<article class="listing">
         <header>
         <img src=${listing.image_url}></img>
+        <span class="fa fa-star"></span>
           <h3>${listing.title} - $${listing.price}</h3>
           <span class="seller-name">${listing.first_name} ${listing.last_name}</span>
         </header>
@@ -24,6 +25,7 @@ const createFeaturedListingElement = (listing) => {
   const $listing = `<article class="featured-listing">
         <header>
         <img src=${listing.image_url}></img>
+        <span class="fa fa-star"></span>
           <h3>${listing.title} - $${listing.price}</h3>
           <span class="seller-name">${listing.first_name} ${listing.last_name}</span>
         </header>
@@ -80,6 +82,10 @@ $(document).ready(() => {
   
   $("#sign-in").click((event) => {
     window.location.href = "users/signin";
+  });
+
+  $(".fa-regular.fa-star").click(function() {
+    $(this).css("color", "#FFC800");
   });
 
 

@@ -13,13 +13,14 @@ const MAX_FEATURED_LISTINGS = 5;
 const AMOUNT_OF_NEW_FEATURED_LISTINGS = 5;
 const MIN_LISTING_ID_NUMBER = 2;
 const MAX_LISTING_ID_NUMBER = 32;
+const MAX_NUMBER_OF_LISTINGS_ON_PAGE = 20;
 
 router.get('/', (req, res) => {
   db.query(`
   SELECT listings.*, users.* 
   FROM listings 
   JOIN users ON listings.user_id = users.id 
-  LIMIT 20;`)
+  LIMIT ${MAX_NUMBER_OF_LISTINGS_ON_PAGE};`)
     .then((data) => {
       res.json(data.rows);
     });
@@ -50,6 +51,7 @@ router.get('/refeature', (req, res) => {
 
   let newListingIds = generateRandomInts(AMOUNT_OF_NEW_FEATURED_LISTINGS, MIN_LISTING_ID_NUMBER, MAX_LISTING_ID_NUMBER);
   let listingIds = [Array.from({length: MAX_LISTING_ID_NUMBER}, (_, i) => i + 2)];
+  
   db.query(`
   UPDATE listings
   SET is_featured = false
