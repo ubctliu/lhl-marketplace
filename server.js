@@ -43,9 +43,10 @@ const mylistingsRoutes = require("./routes/myListings");
 app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
-app.use('/listings', listingsRoutes); 
+app.use('/listings', listingsRoutes);
 app.use("/api/mylistings", mylistingsRoutes);
 // app.use('/signin', signinRoute)
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page

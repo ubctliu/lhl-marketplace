@@ -12,9 +12,14 @@ body {
   flex-direction: column;
   background: #FFCD29;
   width: 100%;
-  padding: 5em 0em 15em 0em;
+  padding: 5em 0em 0em 0em;
 
   #featured-logo {
     font-size: 2em;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
+}
+
+@media screen and (min-width: 1024px) {
 }

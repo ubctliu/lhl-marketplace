@@ -2,20 +2,21 @@ const db = require('../connection');
 
 const getUsers = () => {
   return db.query('SELECT * FROM users;')
-    .then(users => {
-      return users.rows;
+    .then(data => {
+      console.log(data.rows);
+      return data.rows;
     });
 };
 
 const getUserById = (id) => {
-  return db.query('SELECT * FROM users WHERE id = $1', [id])
+  return db.query('SELECT * FROM users WHERE id = $1;', [id])
     .then(user => {
       return user.rows[0];
     });
 };
 
 const checkUserByEmail = (email) => {
-  return db.query('SELECT * FROM users WHERE email = $1', [email])
+  return db.query('SELECT * FROM users WHERE email = $1;', [email])
     .then(email => {
       // console.log(user.rows[0])
       return email.rows[0];
@@ -28,25 +29,21 @@ const checkUserByEmailAndPassword = (email, password) => {
  email= email.toLowerCase();
   return db.query('SELECT * FROM users WHERE email = $1 AND password = $2;', [email, password])
     .then(result => {
-     //console.log(result.rows);
       return result.rows[0]; // This will return the user if a match is found, otherwise null.
     });
 };
 
-
 const getUserIdByEmail = (email) => {
-  return db.query('SELECT id FROM users WHERE email = $1', [email])
+  return db.query('SELECT id FROM users WHERE email = $1;', [email])
     .then(email => {
-      // console.log(user.rows[0])
       return email.rows[0];
     });
 };
 
 const createaccount = (first_name, last_name, email, password, phone_number) => {
-  return db.query(`INSERT INTO users (first_name, last_name, email,password, phone_number )
-                  VALUES ($1, $2, $3, $4, $5) RETURNING *`, [first_name, last_name, email, password, phone_number])
+  return db.query(`INSERT INTO users (first_name, last_name, email,password, phone_number)
+                  VALUES ($1, $2, $3, $4, $5) RETURNING *;`, [first_name, last_name, email, password, phone_number])
     .then(result => {
-      console.log(result.rows[0]);
       return result.rows[0];
     });
 
