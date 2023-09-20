@@ -9,6 +9,7 @@ const express = require('express');
 const router  = express.Router();
 const userQueries = require('../db/queries/users');
 
+
 router.get('/', (req, res) => {
   res.render('users');
 });
@@ -17,6 +18,9 @@ router.get('/signin', (req, res) => {
   res.render('signin');
 });
 
+router.get('/register', (req, res) =>{
+  res.render('register');
+})
 
 router.post('/signin', (req, res) => {
   let email = req.body.email;
@@ -32,7 +36,7 @@ router.post('/signin', (req, res) => {
   userQueries.checkUserByEmailAndPassword(email, password)
     .then(user => {
       if (user) {
-        // Redirect the user to the home
+        // Redirect the user to the landing page
         res.redirect('/');
       } else {
         console.log("Invalid Email or Password");
@@ -45,9 +49,41 @@ router.post('/signin', (req, res) => {
     });
 });
 
+router.get('/users/:id', (req, res) => {
+  const id = req.params.id;
+
+  res.render('users', { id });
+});
 
 router.get('/createaccount', (req, res) => {
   res.render('createaccount');
 });
+
+router.post('/createaccount', (req, res) => {
+  let { first_name, last_name, email, password, phone_number } = req.body;
+  
+  // if one or more required field(s) left empty it will throw an error
+  if (!first_name || !last_name || !email || !password || !phone_number) {
+    return res.status(400).send("Error 400: One or more fields are empty.");
+  }
+
+  userQueries.createaccount(
+    first_name,
+    last_name,
+    email,
+    password,
+    phone_number,
+  )
+    .then(newUser => {
+      
+      console.log("User account created successfully!");
+      res.redirect('/'); // Redirect to the home page 
+    })
+    .catch(err => {
+      console.error("Error creating user:", err);
+      res.status(500).send("Error 500: Internal Server Error.");
+    });
+});
+
 
 module.exports = router;

@@ -1,42 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <title>Signup</title>
-  <meta charset="UTF-8" >
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" >
-
-  <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
-  <link rel="stylesheet" href="/vendor/border-box.css" />
-  <link rel="stylesheet" href="/styles/nav.css" />
-  <link rel="stylesheet" href="/styles/signin.css" />
-  <link rel="stylesheet" href="/styles/layout.css" />
-
-  <!-- Font Awesome -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
-  <script src="/vendor/jquery-3.0.0.js"></script>
-  <script defer src="/scripts/app.js"></script>
-</head>
+  <head>
+    <title>Create account</title>
+    <meta charset="UTF-8" >
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+  
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/nav.css" />
+    <link rel="stylesheet" href="/styles/createaccount.css" />
+    <link rel="stylesheet" href="/styles/signin.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/app.js"></script>
+  </head>
 <body>
-  <%- include('partials/_nav') %>
+  <% include('partials/_nav') %>
 
-  <div class ="signin">
-    <form action="/signin" method="post">
+  <div class="createaccount">
+    <form action="/users/createaccount" method="post">
+      <label for="first_name"><b>First Name</b></label>
+      <input type="text" id="first_name" name="first_name" placeholder="First Name.." required>
+
+      <label for="last_name"><b>Last Name</b></label>
+      <input type="text" id="last_name" name="last_name" placeholder="Last Name.." required>
+
       <label for="email"><b>Email</b></label>
-      <input type="text" id="email" name="email" placeholder="Email..">
+      <input type="email" id="email" name="email" placeholder="Email Address.." required>
 
-      <label for="username"><b>Username</b></label>
-      <input type="text" id="username" name="username" placeholder="Username..">
-  
       <label for="password"><b>Password</b></label>
-      <input type="text" id="password" name="password" placeholder="Password..">
-    
-      <input type="submit" value="Sign in">
-    </form>
-    <a href="users/createaccount">Create an account</a>
-  </div>
+      <input type="password" id="password" name="password" placeholder="Password.." required>
 
-  
+      <label for="phone_number"><b>Phone Number</b></label>
+      <input type="tel" id="phone_number" name="phone_number" placeholder="Phone Number.." required>
+
+      <input type="submit" value="createaccount">
+    </form>
+    <a href="/users/signin">Already have account? Sign-in</a>
+  </div>
 </body>
 </html>
