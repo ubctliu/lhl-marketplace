@@ -120,3 +120,4 @@ router.post('/:id/edit', (req, res) => {
           .json({ error: err.message });
       });
 });
+module.exports = router;
