@@ -1,9 +1,15 @@
+const db = require ('../connection')
 // get an indivual list by it's id
 const getListingById = (id) => {
-    return db.query('SELECT * FROM listings WHERE id = $1', [id])
-      .then((listing) => {
-        return listing.rows[0];
-      });
+  return db.query(`
+    SELECT l.*, u.first_name, u.last_name
+    FROM listings AS l
+    JOIN users AS u ON l.user_id = u.id
+    WHERE l.id = $1
+  `, [id])
+  .then((result) => {
+    return result.rows[0];
+  });
 };
 // get all listing by users
 const getListingsByUser = (user_id) => {

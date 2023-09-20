@@ -7,8 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/queries/users')
-
+const userQueries = require('../db/queries/users');
 
 
 router.get('/', (req, res) => {
@@ -20,14 +19,12 @@ router.get('/signin', (req, res) => {
 });
 
 router.get('/register', (req, res) =>{
-  console.log("helo")
   res.render('register');
 })
 
 router.post('/signin', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
-  console.log(req.body);
 
   if (email === "" || password === "") {
     console.log("Username and/or Password Empty");
@@ -38,10 +35,9 @@ router.post('/signin', (req, res) => {
   // Use the checkUserByEmailAndPassword function to check if email and password match
   userQueries.checkUserByEmailAndPassword(email, password)
     .then(user => {
-      //console.log(user);
       if (user) {
-        // Redirect the user to the home
-        res.redirect('/'); 
+        // Redirect the user to the landing page
+        res.redirect('/');
       } else {
         console.log("Invalid Email or Password");
         res.status(401).send("Error 401: Invalid Email or Password.");
@@ -53,16 +49,38 @@ router.post('/signin', (req, res) => {
     });
 });
 
+/*
 router.get('/users/:id', (req, res) => {
   const id = req.params.id;
 
   res.render('users', { id });
 });
-
+*/
 
 router.get('/createaccount', (req, res) => {
   res.render('createaccount');
 });
+
+router.get("/:id", (req, res) => {
+  const id = req.params.id;
+  console.log("Requested user ID:", id); 
+
+  userQueries.getUserDetailsWithListingsById(id)
+  .then(data => {
+    console.log("Query Result:", data);
+    if (!data) {
+      res.status(404).json({ error: "User not found" });
+    } else {
+      const user = data;
+      res.render("user-details", { user });
+    }
+  })
+  .catch(err => {
+    console.error("Query Error:", err);
+    res.status(500).json({ error: err.message });
+  });
+});
+
 
 router.post('/createaccount', (req, res) => {
   let { first_name, last_name, email, password, phone_number } = req.body;
