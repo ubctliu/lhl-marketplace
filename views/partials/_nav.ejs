@@ -7,11 +7,20 @@
     </div>
     <div class="menu-options">
     <input id ="search-bar" type="text" placeholder="Search..">
-    <button id="sign-in">Sign in</button>
+    <% if (typeof userId !== 'undefined' && userId !== null) { %>
+      <span class="logged">Signed in as <%= firstName %>, <%= lastName %></span>
+      <form method="POST" action="/users/signout">
+        <button type="submit">Sign out</button>
+      </form>
+    <%} else { %>
+        <a href="/users/signin">
+        <button id="sign-in">Sign in</button>
+        </a>
+    <% } %>
     <div class="dropdown-menu">
-      <span id="dropdown-menu-icon" class="fa-solid fa-bars style=color: black">
+      <span id="dropdown-menu-icon" class="fa-solid fa-bars" style="color: black">
       <ul id ="dropdown-menu-content">
-        <a href="/link1">Link 1</a>
+        <a href="/users/favorites">Favorites</a>
         <a href="/link2">Link 2</a>
       </ul>
     </span>

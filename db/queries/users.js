@@ -24,10 +24,8 @@ const checkUserByEmail = (email) => {
 };
 
 const checkUserByEmailAndPassword = (email, password) => {
- // console.log(email, password);
- email= email.trim();
- email= email.toLowerCase();
-  return db.query('SELECT * FROM users WHERE email = $1 AND password = $2;', [email, password])
+  let trimmedEmail = email.trim().toLowerCase();
+  return db.query('SELECT * FROM users WHERE email = $1 AND password = $2;', [trimmedEmail, password])
     .then(result => {
       return result.rows[0]; // This will return the user if a match is found, otherwise null.
     });

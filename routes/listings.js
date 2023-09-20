@@ -39,8 +39,10 @@ router.get('/refeature', (req, res) => {
 
 // show a specific item
 router.get("/listings/:id", (req, res) => {
+  const id = req.params.id;
   listingsQueries.getListingById(id)
     .then(data => {
+      console.log(data);
       const item = data.rows[0];
       res.render("listing-detail");
     })
