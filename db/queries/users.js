@@ -23,9 +23,12 @@ const checkUserByEmail = (email) => {
 };
 
 const checkUserByEmailAndPassword = (email, password) => {
-  return db.query('SELECT * FROM users WHERE email = $1 AND password = $2', [email, password])
+ // console.log(email, password);
+ email= email.trim();
+ email= email.toLowerCase();
+  return db.query('SELECT * FROM users WHERE email = $1 AND password = $2;', [email, password])
     .then(result => {
-      console.log(result);
+     //console.log(result.rows);
       return result.rows[0]; // This will return the user if a match is found, otherwise null.
     });
 };
@@ -39,9 +42,9 @@ const getUserIdByEmail = (email) => {
     });
 };
 
-const addUser = (email, password) => {
+const createaccount = (first_name, last_name, email, password, phone_number) => {
   return db.query(`INSERT INTO users (first_name, last_name, email,password, phone_number )
-                  VALUES ('generic', 'generic', $1, $2, 999) RETURNING *`, [email, password])
+                  VALUES ($1, $2, $3, $4, $5) RETURNING *`, [first_name, last_name, email, password, phone_number])
     .then(result => {
       console.log(result.rows[0]);
       return result.rows[0];
@@ -49,4 +52,4 @@ const addUser = (email, password) => {
 
 };
 
-module.exports = { getUsers, getUserById, checkUserByEmail, addUser, getUserIdByEmail, checkUserByEmailAndPassword};
+module.exports = { getUsers, getUserById, checkUserByEmail, createaccount, getUserIdByEmail, checkUserByEmailAndPassword};
