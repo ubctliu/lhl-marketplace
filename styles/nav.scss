@@ -11,17 +11,18 @@ nav {
   z-index: 1;
   top: 0;
   width: 100%;
-
-  #logo {
+  a {
+    text-decoration: none;
+    color: inherit;
+    display: contents;
+    #logo {
     display: flex;
     position: absolute;
     align-items: flex-end;
     flex-direction: column;
     padding: 0em 25em 0em 45.5em;
     font-size: 1.15em;
-    :hover {
-      cursor: pointer;
-    }
+  }
   }
   
   .links {
@@ -34,7 +35,7 @@ nav {
     align-items: flex-end;
     flex-direction: row;
     padding: 0em 0em 0em 90em;
-
+    gap: 10px;
     #sign-in {
       &:hover {
         cursor: pointer;

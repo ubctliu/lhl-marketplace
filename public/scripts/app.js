@@ -24,7 +24,7 @@ const createFeaturedListingElement = (listing) => {
   const $listing = `<article class="featured-listing">
         <header>
         <img src=${listing.image_url}></img>
-        <span class="fa-solid fa-star"></span>
+        <span class="fa-solid fa-star" listing-id=${listing.id}></span>
           <h3>${listing.title} - $${listing.price}</h3>
         </header>
           <p class="listing-description">${escape(listing.description)}</p>
@@ -72,20 +72,15 @@ $(document).ready(() => {
     $("#dropdown-menu-content").toggle();
   });
 
-  // on clicking logo, return to the main page
-  $("#logo").click((event) => {
-    window.location.href = "/";
-  });
-
   $(".listings").on("click", ".fa-solid.fa-star", function() {
     $(this).toggleClass('yellow-star');
-    const listingId = $(this).attr("listing-id");
+    const listingId = Number($(this).attr("listing-id"));
     $.post("/users/favorites", { listingId });
   });
 
   $(".featured-listings").on("click", ".fa-solid.fa-star", function() {
     $(this).toggleClass('white-star');
-    const listingId = $(this).attr("listing-id");
+    const listingId = Number($(this).attr("listing-id"));
     $.post("/users/favorites", { listingId });
   });
 

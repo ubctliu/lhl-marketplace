@@ -8,7 +8,7 @@ const addToFavorites = (userId, listingId) => {
   return db.query(`
   INSERT INTO favorites (user_id, listing_id)
   VALUES($1, $2)
-  RETURNING *;`, [userId, listingId])
+  RETURNING *;`, [userId, Number(listingId)])
     .then((data) =>{
       return data.rows;
     });
@@ -18,7 +18,7 @@ const isListingFavorited = (userId, listingId) => {
   return db.query(`
   SELECT * FROM favorites
   WHERE user_id = $1 AND listing_id = $2;
-  `, [userId, listingId])
+  `, [userId, Number(listingId)])
     .then((data) => {
       return data.rows;
     });
@@ -29,7 +29,7 @@ const removeFromFavorites = (userId, listingId) => {
   DELETE FROM favorites
   WHERE user_id = $1 AND listing_id = $2
   RETURNING *;
-  `, [userId, listingId])
+  `, [userId, Number(listingId)])
     .then((data) => {
       return data.rows;
     });

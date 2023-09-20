@@ -23,7 +23,11 @@
 
 <body>
 <%- include('partials/_nav') %>
+<% if (firstName) {%>
 <h3><%= firstName %>'s favorite listings</h3>
+<% } else {%>
+  <h3>You must be logged in to view your favorites!</h3>
+<% } %>
 <section class="favorited-listings">
   
 </section>

@@ -62,7 +62,12 @@ app.use("/api/listings", listingApiRoutes);
 // Separate them into separate routes files (see above).
 
 app.get('/', (req, res) => {
-  res.render('index');
+  const templateVars = {
+    userId: req.session.userId,
+    firstName: req.session.firstName,
+    lastName: req.session.lastName
+  };
+  res.render('index', templateVars);
 });
 
 app.listen(PORT, () => {

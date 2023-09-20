@@ -44,13 +44,12 @@ router.post('/favorites', (req, res) => {
 
   isListingFavorited(userId, listingId)
     .then((data) => {
-      console.log(data);
       if (data.length > 0) {
         console.log(`Removing ${data} from favorited listings.`);
-        removeFromFavorites(userId, listingId);
+        removeFromFavorites(userId, Number(listingId));
       } else {
         console.log("Adding to favorited listings.");
-        addToFavorites(userId, listingId);
+        addToFavorites(userId, Number(listingId));
       }
       res.redirect('/');
     });
