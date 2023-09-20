@@ -57,9 +57,19 @@
         cursor: pointer;
         transform: scale(1.1);
       }
+      z-index: 1;
     }
   }
 }
 
+.yellow-star {
+  color: #FFC800;
+}
+
+.white-star {
+  color: #FFFFFF;
+}
+
 @media screen and (min-width: 1024px) {
+
 }

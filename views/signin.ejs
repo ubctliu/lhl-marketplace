@@ -22,16 +22,16 @@
   <%- include('partials/_nav') %>
 
   <div class ="signin">
-    <form action="/signin" method="post">
-      <label for="username"><b>Username</b></label>
-      <input type="text" id="username" name="username" placeholder="Username..">
+    <form action="/users/signin" method="post">
+      <label for="email"><b>Email</b></label>
+      <input type="text" id="email" name="email" placeholder="Email..">
   
       <label for="password"><b>Password</b></label>
       <input type="text" id="password" name="password" placeholder="Password..">
     
       <input type="submit" value="Sign in">
     </form>
-    <a href="/createaccount">Create an account</a>
+    <a href="/users/createaccount">Create an account</a>
   </div>
 
   

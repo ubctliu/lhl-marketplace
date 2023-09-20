@@ -7,9 +7,8 @@ const createListingElement = (listing) => {
   const $listing = `<article class="listing">
         <header>
         <img src=${listing.image_url}></img>
-        <span class="fa fa-star"></span>
+        <span class="fa-solid fa-star"></span>
           <h3>${listing.title} - $${listing.price}</h3>
-          <span class="seller-name">${listing.first_name} ${listing.last_name}</span>
         </header>
           <p class="listing-description">${escape(listing.description)}</p>
         <footer> 
@@ -25,9 +24,8 @@ const createFeaturedListingElement = (listing) => {
   const $listing = `<article class="featured-listing">
         <header>
         <img src=${listing.image_url}></img>
-        <span class="fa fa-star"></span>
+        <span class="fa-solid fa-star"></span>
           <h3>${listing.title} - $${listing.price}</h3>
-          <span class="seller-name">${listing.first_name} ${listing.last_name}</span>
         </header>
           <p class="listing-description">${escape(listing.description)}</p>
         <footer> 
@@ -84,8 +82,12 @@ $(document).ready(() => {
     window.location.href = "users/signin";
   });
 
-  $(".fa-regular.fa-star").click(function() {
-    $(this).css("color", "#FFC800");
+  $(".listings").on("click", ".fa-solid.fa-star", function() {
+    $(this).toggleClass('yellow-star');
+  });
+
+  $(".featured-listings").on("click", ".fa-solid.fa-star", function() {
+    $(this).toggleClass('white-star');
   });
 
 
