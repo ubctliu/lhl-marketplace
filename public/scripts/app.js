@@ -67,6 +67,7 @@ $(document).ready(() => {
       renderFeaturedListings(listings);
     });
     
+
   // reveal drop-down menu on click
   $("#dropdown-menu-icon").click((event) => {
     $("#dropdown-menu-content").toggle();
@@ -77,6 +78,13 @@ $(document).ready(() => {
     const listingId = Number($(this).attr("listing-id"));
     $.post("/users/favorites", { listingId });
   });
+
+  $(".favorited-listings").on("click", ".fa-solid.fa-star", function() {
+    $(this).toggleClass('yellow-star');
+    const listingId = Number($(this).attr("listing-id"));
+    $.post("/users/favorites", { listingId });
+  });
+
 
   $(".featured-listings").on("click", ".fa-solid.fa-star", function() {
     $(this).toggleClass('white-star');
