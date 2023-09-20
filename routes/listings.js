@@ -3,8 +3,12 @@ const router  = express.Router();
 const listingsQueries = require('../db/queries/listings-queries')
 
 
+router.get('/', (req, res) => {
+  res.render('listing-details');
+});
+
 // show a specific item
-router.get("/listings/:id", (req, res) => {
+router.get("/:id", (req, res) => {
   listingsQueries.getListingById(id)
     .then(data => {
       const item = data.rows[0];
