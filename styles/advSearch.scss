@@ -1,0 +1,93 @@
+// Variables
+$font-primary: 'Arial', sans-serif;
+$color-primary: #333;
+$color-bg: #f4f4f4;
+$color-form-bg: #F2DA9C;
+$color-border: #ccc;
+$color-btn: #007BFF;
+$color-btn-hover: #0056b3;
+$color-checkbox-hover: #007BFF;
+$nav-height: 60px;
+$container-width: 800px;
+$mobile-breakpoint: 480px;
+
+// Reset and base styles
+body {
+  font-family: $font-primary;
+  background-color: $color-bg;
+  background-image: url("https://images.unsplash.com/photo-1601598851547-4302969d0614?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2728&q=80");
+  color: $color-primary;
+  line-height: 1.6;
+  padding-top: $nav-height;
+  -webkit-font-smoothing: antialiased;
+}
+
+.container {
+  max-width: $container-width;
+  margin: 0 auto;
+  padding: 20px;
+  transition: padding 0.3s ease-in-out;
+
+  @media (max-width: $mobile-breakpoint) {
+    padding: 20px 10px;
+  }
+}
+
+// Advanced Search Styles
+.adv-search {
+  background-color: $color-form-bg;
+  opacity: 0.9;
+  padding: 25px 20px;
+  margin: 20px 0;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  form {
+    display: grid;
+    gap: 15px;
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid $color-border;
+      border-radius: 4px;
+      font-size: 16px;
+      transition: border-color 0.2s, box-shadow 0.2s;
+
+      &:focus {
+        border-color: $color-btn;
+        box-shadow: 0 0 8px rgba($color-btn, 0.2);
+      }
+    }
+
+    input[type="submit"] {
+      background-color: $color-btn;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.2s, transform 0.1s;
+
+      &:hover {
+        background-color: $color-btn-hover;
+      }
+
+      &:active {
+        transform: scale(0.98);
+      }
+    }
+
+    @media (max-width: $mobile-breakpoint) {
+      display: block;
+    }
+  }
+}
