@@ -11,21 +11,24 @@ nav {
   z-index: 1;
   top: 0;
   width: 100%;
+
   a {
     text-decoration: none;
     color: inherit;
     display: contents;
+
     #logo {
-    display: flex;
-    position: absolute;
-    align-items: flex-end;
-    flex-direction: column;
-    padding: 0em 25em 0em 45.5em;
-    font-size: 1.15em;
+      display: flex;
+      position: absolute;
+      align-items: flex-end;
+      flex-direction: column;
+      padding: 0em 25em 0em 45.5em;
+      font-size: 1.15em;
+    }
   }
-  }
-  
+
   .links {
+    display: none; // Hide on mobile by default
     position: absolute;
     padding: 0em 0em 0em 0em;
   }
@@ -36,6 +39,7 @@ nav {
     flex-direction: row;
     padding: 0em 0em 0em 90em;
     gap: 10px;
+
     #sign-in {
       &:hover {
         cursor: pointer;
@@ -47,28 +51,53 @@ nav {
     display: flex;
     align-items: center;
     padding: 0em 0em 0em 2.5em;
+
     #dropdown-menu-icon {
       font-size: 1.5em;
+
       &:hover {
         cursor: pointer;
       }
     }
 
     #dropdown-menu-content {
-        display: none;
-        position: absolute;
-        background-color: #b4afaf;
-        z-index: 1;
-        padding: 0em 1em 0em 0em;
-        font-size: medium;
-    }
+      display: none;
+      position: absolute;
+      background-color: #b4afaf;
+      z-index: 1;
+      padding: 0em 1em 0em 0em;
+      font-size: medium;
 
-    #dropdown-menu-content a {
-      color: black;
-      // display: block;
+      a {
+        color: black;
+      }
     }
   }
 }
 
-@media screen and (min-width: 1024px) {
+// Mobile Styles (e.g., for screens smaller than 768px)
+@media screen and (max-width: 767px) {
+  nav {
+    .menu-options {
+      padding: 0;
+      justify-content: space-between;
+
+      #sign-in, form {
+        // Adjustments for mobile can be added here if needed
+      }
+    }
+  }
+}
+
+// Tablet and Larger Screens Styles (e.g., screens larger than or equal to 768px)
+@media screen and (min-width: 768px) {
+  nav {
+    .links {
+      display: block; // Show traditional links on larger screens
+    }
+
+    .dropdown-menu {
+      display: none; // Hide the dropdown on larger screens
+    }
+  }
 }
