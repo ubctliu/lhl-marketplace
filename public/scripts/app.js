@@ -83,6 +83,7 @@ $(document).ready(() => {
     $(this).toggleClass('yellow-star');
     const listingId = Number($(this).attr("listing-id"));
     $.post("/users/favorites", { listingId });
+    location.reload();
   });
 
 

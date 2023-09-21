@@ -23,6 +23,15 @@ router.get('/register', (req, res) => {
   res.render('register');
 });
 
+router.get('/messages', (req, res) => {
+  const templateVars = {
+    userId: req.session.userId,
+    firstName: req.session.firstName,
+    lastName: req.session.lastName
+  };
+  res.render('messages', templateVars);
+});
+
 router.get('/favorites', (req, res) => {
   const templateVars = {
     userId: req.session.userId,

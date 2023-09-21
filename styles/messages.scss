@@ -1,0 +1,42 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #F2DA9C;
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: end;
+  background: rgb(209, 206, 206);
+  width: 60%;
+  height: 80%;
+  min-height: 800px;
+  padding: 5em 10em 0em 10em;
+  .message-box {
+    display: flex;
+    align-items: center;
+    width: 300px; /* Set your desired width */
+    font-size: 22px; /* Set your desired font size */
+    box-sizing: border-box; /* Include padding and border in the total width/height */
+    position: relative;
+    padding: 0em 0em 0em 13em;
+    .message-input {
+      flex: 1;
+      padding: 10px;
+    }
+    .fa-solid.fa-paper-plane {
+      position: absolute;
+      right: -12em;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+}
+
+#error-msg {
+  z-index: 1;
+  padding: 5em 0em 0em 0em;
+}
