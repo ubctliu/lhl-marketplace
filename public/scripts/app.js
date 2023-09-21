@@ -7,7 +7,7 @@ const createListingElement = (listing) => {
   const $listing = `<article class="listing">
         <header>
         <img src=${listing.image_url}></img>
-        <span class="fa-solid fa-star"></span>
+        <span class="fa-solid fa-star" listing-id=${listing.id}></span>
           <h3>${listing.title} - $${listing.price}</h3>
         </header>
           <p class="listing-description">${escape(listing.description)}</p>
@@ -24,7 +24,7 @@ const createFeaturedListingElement = (listing) => {
   const $listing = `<article class="featured-listing">
         <header>
         <img src=${listing.image_url}></img>
-        <span class="fa-solid fa-star"></span>
+        <span class="fa-solid fa-star" listing-id=${listing.id}></span>
           <h3>${listing.title} - $${listing.price}</h3>
         </header>
           <p class="listing-description">${escape(listing.description)}</p>
@@ -51,10 +51,27 @@ const renderFeaturedListings = (listings) => {
   }
 };
 
+const renderUserListings = (listings) => {
+  for (const listing of listings) {
+    const $listing = createListingElement(listing);
+    $(".mylistings").prepend($listing);
+  }
+};
 
 $(document).ready(() => {
   // hide drop-down menu on load
   $("#dropdown-menu-content").hide();
+
+  $.get(`/api/users/userlistings`)
+  .done(listings => {
+    //console.log(listings);
+    renderUserListings(listings);
+
+    
+    const templateData = {
+      listings: listings 
+    };
+  });
 
   $.get("/listings")
     .done(listings => {
@@ -67,27 +84,29 @@ $(document).ready(() => {
     .done(listings => {
       renderFeaturedListings(listings);
     });
-    
+
   // reveal drop-down menu on click
   $("#dropdown-menu-icon").click((event) => {
     $("#dropdown-menu-content").toggle();
   });
 
-  // on clicking logo, return to the main page
-  $("#logo").click((event) => {
-    window.location.href = "/";
-  });
-  
-  $("#sign-in").click((event) => {
-    window.location.href = "users/signin";
-  });
-
   $(".listings").on("click", ".fa-solid.fa-star", function() {
     $(this).toggleClass('yellow-star');
+    const listingId = Number($(this).attr("listing-id"));
+    $.post("/users/favorites", { listingId });
   });
+
+  $(".favorited-listings").on("click", ".fa-solid.fa-star", function() {
+    $(this).toggleClass('yellow-star');
+    const listingId = Number($(this).attr("listing-id"));
+    $.post("/users/favorites", { listingId });
+  });
+
 
   $(".featured-listings").on("click", ".fa-solid.fa-star", function() {
     $(this).toggleClass('white-star');
+    const listingId = Number($(this).attr("listing-id"));
+    $.post("/users/favorites", { listingId });
   });
 
 

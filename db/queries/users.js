@@ -21,22 +21,23 @@ const getUserDetailsWithListingsById = (id) => {
     [id]
   )
     .then(result => {
-      const userDetails = result.rows[0];
-      if (!userDetails) {
-        return null; // User not found
-      }
+      return result.rows;
+      // const userDetails = result.rows[0];
+      // if (!userDetails) {
+      //   return null; // User not found
+      // }
 
-      const listings = result.rows.map(row => ({
-        listing_id: row.listing_id,
-        title: row.title,
-        description: row.description,
-        price: row.price,
-        category: row.category,
-        image_url: row.image_url,
-      }));
+      // const listings = result.rows.map(row => ({
+      //   listing_id: row.listing_id,
+      //   title: row.title,
+      //   description: row.description,
+      //   price: row.price,
+      //   category: row.category,
+      //   image_url: row.image_url,
+      // }));
 
-      userDetails.listings = listings;
-      return userDetails;
+      // userDetails.listings = listings;
+      // return userDetails;
     });
 };
 
@@ -51,10 +52,8 @@ const checkUserByEmail = (email) => {
 };
 
 const checkUserByEmailAndPassword = (email, password) => {
- // console.log(email, password);
- email= email.trim();
- email= email.toLowerCase();
-  return db.query('SELECT * FROM users WHERE email = $1 AND password = $2;', [email, password])
+  const trimmedEmail = email.trim().toLowerCase();
+  return db.query('SELECT * FROM users WHERE email = $1 AND password = $2;', [trimmedEmail, password])
     .then(result => {
       return result.rows[0]; // This will return the user if a match is found, otherwise null.
     });

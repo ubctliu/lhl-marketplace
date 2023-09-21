@@ -14,7 +14,7 @@ const MAX_LISTING_ID_NUMBER = 32;
 const getAllListings = (options, limit = 10) => {
   const queryParams = [];
   let queryString = `
-  SELECT listings.*, users.* 
+  SELECT listings.*, users.first_name, users.last_name
   FROM listings
   JOIN users ON listings.user_id = users.id
   `;
@@ -80,6 +80,7 @@ const getAllListings = (options, limit = 10) => {
   queryString += `
     LIMIT $${queryParams.length};
     `;
+
   return db.query(queryString, queryParams)
     .then((data) => {
       return data.rows;
@@ -92,7 +93,7 @@ const getAllListings = (options, limit = 10) => {
 const getAllFeatured = (limit = 5) => {
   const queryParams = [];
   let queryString = `
-  SELECT listings.*, users.* 
+  SELECT listings.*, users.first_name, users.last_name
   FROM listings 
   JOIN users ON listings.user_id = users.id 
   WHERE listings.is_featured = true

@@ -7,7 +7,8 @@
 
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/queries/users');
+const { createaccount, checkUserByEmailAndPassword,getUserDetailsWithListingsById } = require('../db/queries/users');
+const { addToFavorites, isListingFavorited, removeFromFavorites } = require('../db/queries/favorites');
 
 
 router.get('/', (req, res) => {
@@ -18,26 +19,66 @@ router.get('/signin', (req, res) => {
   res.render('signin');
 });
 
-router.get('/register', (req, res) =>{
+router.get('/register', (req, res) => {
   res.render('register');
-})
+});
+
+router.get('/favorites', (req, res) => {
+  const templateVars = {
+    userId: req.session.userId,
+    firstName: req.session.firstName,
+    lastName: req.session.lastName
+  };
+  res.render('favorites', templateVars);
+});
+
+router.post('/favorites', (req, res) => {
+  const userId = req.session.userId;
+  const listingId = req.body.listingId;
+  // simulate favoriting behavior from other sites - if not already favorited, add to favorites
+  // - else remove from favorites
+  if (!userId) {
+    res.status(401).send("Error occurred. Must be logged in to add to favorites!");
+    return;
+  }
+
+  isListingFavorited(userId, listingId)
+    .then((data) => {
+      if (data.length > 0) {
+        console.log(`Removing ${data} from favorited listings.`);
+        removeFromFavorites(userId, Number(listingId));
+      } else {
+        console.log("Adding to favorited listings.");
+        addToFavorites(userId, Number(listingId));
+      }
+      res.redirect('/');
+    });
+});
 
 router.post('/signin', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
 
-  if (email === "" || password === "") {
+  if (!email || !password) {
     console.log("Username and/or Password Empty");
     res.status(400).send("Error 400: Username and/or Password Empty.");
     return;
   }
 
   // Use the checkUserByEmailAndPassword function to check if email and password match
-  userQueries.checkUserByEmailAndPassword(email, password)
+  checkUserByEmailAndPassword(email, password)
     .then(user => {
+      // If user exists, log in and return to main
       if (user) {
-        // Redirect the user to the landing page
-        res.redirect('/');
+        req.session.userId = user.id;
+        req.session.firstName = user.first_name;
+        req.session.lastName = user.last_name;
+        const templateVars = {
+          userId: req.session.userId,
+          firstName: req.session.firstName,
+          lastName: req.session.lastName
+        };
+        res.render('index', templateVars);
       } else {
         console.log("Invalid Email or Password");
         res.status(401).send("Error 401: Invalid Email or Password.");
@@ -47,6 +88,14 @@ router.post('/signin', (req, res) => {
       console.error("Error checking user:", err);
       res.status(500).send("Error 500: Internal Server Error.");
     });
+});
+
+router.post('/signout', (req, res) => {
+  let userId = req.session.userId;
+  if (userId) {
+    req.session = null;
+    res.redirect('/');
+  }
 });
 
 /*
@@ -62,17 +111,22 @@ router.get('/createaccount', (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  const id = req.params.id;
-  console.log("Requested user ID:", id); 
+  const id= req.session.userId
 
-  userQueries.getUserDetailsWithListingsById(id)
+  getUserDetailsWithListingsById(id)
   .then(data => {
-    console.log("Query Result:", data);
     if (!data) {
       res.status(404).json({ error: "User not found" });
     } else {
+      const templateVars = {
+        firstName: data[0].first_name,
+        lastName: data[0].last_name,
+        email: data[0].email,
+        phoneNumber: data[0].phone_number,
+        userType: data[0].user_type
+      };
       const user = data;
-      res.render("user-details", { user });
+      res.render("user-details", templateVars); 
     }
   })
   .catch(err => {
@@ -90,7 +144,7 @@ router.post('/createaccount', (req, res) => {
     return res.status(400).send("Error 400: One or more fields are empty.");
   }
 
-  userQueries.createaccount(
+  createaccount(
     first_name,
     last_name,
     email,
@@ -100,7 +154,7 @@ router.post('/createaccount', (req, res) => {
     .then(newUser => {
       
       console.log("User account created successfully!");
-      res.redirect('/'); // Redirect to the home page 
+      res.redirect('/'); // Redirect to the home page
     })
     .catch(err => {
       console.error("Error creating user:", err);
