@@ -3,8 +3,8 @@ const escape = (str) => {
   return $('<div>').text(str).html();
 };
 
-const createListingElement = (listing) => {
-  const $listing = `<article class="listing">
+const createListingElement = (listing, articleClassName) => {
+  const $listing = `<article class=${articleClassName}>
         <header>
         <img src=${listing.image_url}></img>
         <span class="fa-solid fa-star" listing-id=${listing.id}></span>
@@ -19,35 +19,10 @@ const createListingElement = (listing) => {
   return $listing;
 };
 
-
-const createFeaturedListingElement = (listing) => {
-  const $listing = `<article class="featured-listing">
-        <header>
-        <img src=${listing.image_url}></img>
-        <span class="fa-solid fa-star" listing-id=${listing.id}></span>
-          <h3>${listing.title} - $${listing.price}</h3>
-        </header>
-          <p class="listing-description">${escape(listing.description)}</p>
-        <footer> 
-        <div class="icons">
-        </div>
-        </footer>
-      </article>`;
-  return $listing;
-};
-
-const renderListings = (listings) => {
+const renderElement = (listings, callback, container, articleClassName) => {
   for (const listing of listings) {
-    const $listing = createListingElement(listing);
-    $(".listings").prepend($listing);
-  }
-};
-
-
-const renderFeaturedListings = (listings) => {
-  for (const listing of listings) {
-    const $listing = createFeaturedListingElement(listing);
-    $(".featured-listings").prepend($listing);
+    const $listing = callback(listing, articleClassName);
+    $(container).prepend($listing);
   }
 };
 
@@ -57,14 +32,14 @@ $(document).ready(() => {
 
   $.get("/listings")
     .done(listings => {
-      renderListings(listings);
+      renderElement(listings, createListingElement, '.listings', 'listing');
     });
 
   $.get("/listings/refeature");
 
   $.get("/listings/featured")
     .done(listings => {
-      renderFeaturedListings(listings);
+      renderElement(listings, createListingElement, '.featured-listings', 'featured-listing');
     });
     
 
@@ -103,3 +78,9 @@ $(document).ready(() => {
 
   });
 });
+
+module.exports = {
+  escape,
+  createListingElement,
+  renderElement
+};

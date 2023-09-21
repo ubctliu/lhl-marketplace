@@ -27,11 +27,13 @@
 <%- include('partials/_nav') %>
 <% if (userId) {%>
 <section class="chat-container">
+  <section class ="chat-records">
+  </section>
   <form>
-  <div class="message-box">
+  <section class="message-box">
   <input type="text" class="message-input" placeholder="Send a message.." label="message-box">
   <span class="fa-solid fa-paper-plane"></span>
-  </div>
+  </section>
 </form>
 </section>
 <% } else {%>
