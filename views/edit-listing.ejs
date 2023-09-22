@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Listing </title>
+    <!-- Add your CSS stylesheets here -->
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/nav.css" />
+    <link rel="stylesheet" href="/styles/listings.css" />
+    <link rel="stylesheet" href="/styles/listing-details.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
+    <link rel="stylesheet" href="/styles/edit-listing.css" />
+    
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/app.js"></script>
+    <script defer src="/scripts/listings.js"></script>
+    <script defer src="/scripts/favorites.js"></script>
+
+
+</head>
+<body>
+    <%- include('partials/_nav') %>
+    <div class="edit-listing">
+        <p1> Edit listing </p1>
+        <p2>Make you changes to the listing and click on save changes to update your lising</p2>
+        <form action="/listings/<%= listing.id %>" method="POST">
+            <label for="title">Title:</label>
+            <input type="text" id="title" name="title" value="<%= listing.title %>" required>
+      
+            <label for="description">Description:</label>
+            <textarea id="description" name="description" required><%= listing.description %></textarea>
+      
+            <label for="price">Price:</label>
+            <input type="number" step="0.01" id="price" name="price" value="<%= listing.price %>" required>
+      
+            <label for="category">Category:</label>
+            <select id="category" name="category" required>
+                <option value="Electronics" <%= listing.category === 'Electronics' ? 'selected' : '' %>>Electronics</option>
+                <option value="Clothing" <%= listing.category === 'Clothing' ? 'selected' : '' %>>Clothing</option>
+                <option value="Furniture" <%= listing.category === 'Furniture' ? 'selected' : '' %>>Furniture</option>
+                <!-- Add more categories as required -->
+            </select>
+      
+            <label for="stock">Stock:</label>
+            <input type="number" id="stock" name="stock" value="<%= listing.stock %>" required>
+      
+            <label for="image_url">Image URL:</label>
+            <input type="url" id="image_url" name="image_url" value="<%= listing.image_url %>" required>
+      
+            <fieldset>
+            <label for="is_deleted">Is Deleted:</label>
+            <input type="checkbox" id="is_deleted" name="is_deleted" <%= listing.is_deleted ? 'checked' : '' %>>
+      
+            <label for="is_featured">Is Featured:</label>
+            <input type="checkbox" id="is_featured" name="is_featured" <%= listing.is_featured ? 'checked' : '' %>>
+            </fieldset>
+            <button type="submit" class="btn btn-warning">Save Changes</button>
+        </form>
+    </div>
+
+</body>
+</html>

@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
 
 
 
-// delete an item from user's listing
+/*/ delete an item from user's listing
 router.post('/:id/delete', (req, res) => {
   let queryString = `
     DELETE FROM listings
@@ -96,4 +96,5 @@ router.post('/:id/edit', (req, res) => {
         .json({ error: err.message });
     });
 });
+*/
 module.exports = router;

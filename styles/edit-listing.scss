@@ -1,0 +1,76 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: #F2DA9C;
+    // min-height: 100vh;
+  }
+  
+  .edit-listing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 120px;
+
+    p1 {
+        font-size: larger;
+    
+    }
+    p2 {
+        font-size: 20px;
+    }
+  
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 2em;
+  
+      label {
+        position:inherit;
+        font-size: medium;
+        display: block;
+        margin-bottom: 10px;
+      }
+  
+      input[type="text"],
+      input[type="number"],
+      input[type="url"],
+      textarea,
+      select {
+        width: 200%;
+        height: auto;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: medium;
+      }
+  
+      input[type="checkbox"] {
+        margin-right: 5px;
+      }
+  
+      fieldset {
+        margin: 10px 0;
+  
+        label {
+          font-size: medium;
+          margin-right: 5px;
+        }
+      }
+  
+      button[type="submit"] {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: medium;
+        margin-top: 20px;
+      }
+    }
+  }
+  

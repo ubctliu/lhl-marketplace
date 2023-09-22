@@ -21,12 +21,17 @@ const getListingsByUser = (userId) => {
 
 //delete listing in mylistings
 const deleteListing = (listingId) => {
-  return db.query('DELETE FROM listings WHERE listings.id = $1', [listingId])
-    .then((res) => {
-      console.log('listing deleted', res);
-    });
-};
+  return db.query('UPDATE listings SET is_deleted = true WHERE id = $1', [listingId])
+  .then(() => {
   
+    return 'Listing marked as deleted successfully';
+  })
+  .catch(error => {
+    
+    throw error;
+  });
+};
+
 // adds new item to listings
 const addListing = (userId, title, description, price, category, stock, imageUrl) => {
   return db.query(`INSERT INTO listings (user_id, title, description, price, category, stock, image_url)
