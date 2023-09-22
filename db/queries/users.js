@@ -16,9 +16,10 @@ const getUserById = (id) => {
 };
 
 const getUserDetailsWithListingsById = (id) => {
+  const idActual = id[0];
   return db.query(
     'SELECT users.id, users.first_name, users.last_name, users.email, users.phone_number, users.user_type, listings.id as listing_id, listings.title, listings.description, listings.price, listings.category, listings.image_url FROM users LEFT JOIN listings ON users.id = listings.user_id WHERE users.id = $1;',
-    [id]
+    [idActual]
   )
     .then(result => {
       return result.rows;
@@ -46,7 +47,6 @@ const getUserDetailsWithListingsById = (id) => {
 const checkUserByEmail = (email) => {
   return db.query('SELECT * FROM users WHERE email = $1;', [email])
     .then(email => {
-      // console.log(user.rows[0])
       return email.rows[0];
     });
 };
