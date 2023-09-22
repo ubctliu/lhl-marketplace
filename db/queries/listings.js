@@ -86,6 +86,16 @@ const getAllListings = (options, limit = 10) => {
   `;
   }
 
+  if (queryString.includes('WHERE')) {
+    queryString += `
+    AND listings.stock > 0
+    `;
+  } else {
+    queryString += `
+  WHERE listings.stock > 0
+  `;
+  }
+
   queryParams.push(Number(limit));
   queryString += `
     LIMIT $${queryParams.length};
@@ -108,6 +118,7 @@ const getAllFeatured = (limit = 5) => {
   JOIN users ON listings.user_id = users.id 
   WHERE listings.is_featured = true
   `;
+
   if (queryString.includes('WHERE')) {
     queryString += `
     AND listings.is_deleted = false
@@ -117,6 +128,17 @@ const getAllFeatured = (limit = 5) => {
   WHERE listings.is_deleted = false 
   `;
   }
+
+  if (queryString.includes('WHERE')) {
+    queryString += `
+    AND listings.stock > 0
+    `;
+  } else {
+    queryString += `
+  WHERE listings.stock > 0
+  `;
+  }
+
   queryParams.push(Number(limit));
   queryString += `
   LIMIT $${queryParams.length};
@@ -147,6 +169,7 @@ const regenerateFeaturedListings = () => {
   UPDATE listings
   SET is_featured = false
   WHERE listings.id = ANY($1)
+  AND listings.stock > 0
   AND is_deleted = false
   AND is_featured = true;
   `, [listingIds])
@@ -155,6 +178,7 @@ const regenerateFeaturedListings = () => {
   UPDATE listings
   SET is_featured = true
   WHERE listings.id = ANY($1)
+  AND listings.stock > 0
   AND is_deleted = false
   AND is_featured = false;
   `, [newListingIds])

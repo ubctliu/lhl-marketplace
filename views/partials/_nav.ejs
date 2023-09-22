@@ -1,12 +1,18 @@
-<body>
-  <nav>
-    <a href="/" id="logo-link">
-    <span id="logo"><b>Lighthouse Marketplace</b></span>
-    </a>
+<nav>
+  <div class="nav-left">
     <div class="links">
-      <a href="/link1">Link 1</a>
+      <a href="/">Home</a>
       <a href="/link2">Link 2</a>
     </div>
+  </div>
+
+  <div class="nav-center">
+    <a href="/" id="logo-link">
+      <span id="logo"><b>Lighthouse Marketplace</b></span>
+    </a>
+  </div>
+
+  <div class="nav-right">
     <div class="menu-options">
     <input id ="search-bar" type="text" placeholder="Search..">
     <% if (typeof userId !== 'undefined' && userId !== null) { %>
@@ -27,10 +33,16 @@
     <div class="dropdown-menu">
       <span id="dropdown-menu-icon" class="fa-solid fa-bars" style="color: black">
       <ul id ="dropdown-menu-content">
+        <% if (typeof userId !== 'undefined' && userId !== null) { %>
         <a href="/users/favorites">Favorites</a>
-        <a href="/link2">Link 2</a>
+        <a href="/users/messages">Messages</a>
+        <a href="#" id="signout-link">Sign out</a>
+        <%} else { %>
+          <a href="/users/favorites">Favorites</a>
+          <a href="/users/messages">Messages</a>
+          <% } %>
       </ul>
     </span>
     </div>
-    </div>
-  </nav>
+  </div>
+</nav>

@@ -43,7 +43,9 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const listingsRoutes = require('./routes/listings');
-const listingApiRoutes = require("./routes/listings-api");
+const listingApiRoutes = require('./routes/listings-api');
+const messagesRoutes = require('./routes/messages');
+const messageApiRoutes = require('./routes/messages-api');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -52,8 +54,9 @@ app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/listings', listingsRoutes);
-app.use("/api/listings", listingApiRoutes);
-// app.use('/signin', signinRoute)
+app.use('/api/listings', listingApiRoutes);
+app.use('/messages', messagesRoutes);
+app.use('/api/messages', messageApiRoutes);
 
 // Note: mount other resources here, using the same pattern above
 
