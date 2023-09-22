@@ -24,30 +24,7 @@ router.get("/", (req, res) => {
     });
 });
 
-// go to add new listing page
-router.get("/new", (req, res) => {
-  res.render("newlisting");
-});
 
-// add new listing
-router.post("/", (req,res) => {
-  let queryString = `
-    INSERT INTO items(user_id, title, description,price,category, stock, is_featured, image_url)
-    VALUES($1, $2, $3, $4, $5)
-    RETURNING *;
-    `;
-  let queryParams = [req.session.user_id, req.body.title,  req.body.description,req.body.price, req.body.category, req.body.stock, req.body.is_featured, req.body.photo_url];
-  db.query(queryString,queryParams)
-    .then(data => {
-      const listings = data.rows;
-      res.redirect('/api/mylistings');
-    })
-    .catch(err => {
-      res
-        .status(500)
-        .json({ error: err.message });
-    });
-});
 
 // delete an item from user's listing
 router.post('/:id/delete', (req, res) => {

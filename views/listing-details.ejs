@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listing Details</title>
+    <!-- Add your CSS stylesheets here -->
+
+    <link rel="stylesheet" href="/vendor/normalize-4.1.1.css" />
+    <link rel="stylesheet" href="/vendor/border-box.css" />
+    <link rel="stylesheet" href="/styles/main.css" />
+    <link rel="stylesheet" href="/styles/nav.css" />
+    <link rel="stylesheet" href="/styles/listings.css" />
+    <link rel="stylesheet" href="/styles/listing-details.css" />
+    <link rel="stylesheet" href="/styles/layout.css" />
+  
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha512-z3gLpd7yknf1YoNbCzqRKc4qyor8gaKU1qmn+CShxbuBusANI9QpRohGBreCFkKxLhei6S9CQXFEbbKuqLg0DA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+  
+    <script src="/vendor/jquery-3.0.0.js"></script>
+    <script defer src="/scripts/app.js"></script>
+    <script defer src="/scripts/listings.js"></script>
+    <script defer src="/scripts/favorites.js"></script>
+
+
+</head>
+<body>
+    <%- include('partials/_nav') %>
+    <div class="listing-details">
+        
+        <!-- Left Column - Listing Details -->
+        <div class="left-column">
+            <h1><%= listing.title %></h1>
+            <img src="<%= listing.image_url %>" alt="<%= listing.title %>" style="width: 400px; height: 400px;">
+            <p><%= listing.description %></p>
+        </div>
+        <!-- Right Column - Seller Info and Actions -->
+        <div class="right-column">
+            <h1>Item description</h1>
+            <h2>Seller: <%= listing.first_name %> <%= listing.last_name %></h2>
+            <p>Category: <%= listing.category %></p>
+            <p>Price: <%= listing.price %></p>
+            <p>Stock: <%= listing.stock %></p>
+            
+            <% if (userId === listing.user_id) { %>
+                <!-- If the logged-in user is the owner of the listing -->
+                <!-- Display edit, delete, and mark as sold buttons -->
+                <button class="btn btn-warning">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-success">Mark as Sold</button>
+            <% } else { %>
+                <!-- If the logged-in user is not the owner of the listing -->
+                <!-- Display send email and add to favorites buttons -->
+                <button class="btn btn-primary">Send Email to Seller</button>
+                <button class="btn btn-success" id="addToFavorites">Add to Favorites</button>
+            <% } %>
+        </div>
+
+    </div>
+    <script>
+        const addToFavoritesButton = document.getElementById("addToFavorites");
+
+     
+        addToFavoritesButton.addEventListener("click", () => {
+
+            fetch("/users/favorites", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ listingId: <%= listing.id %> })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Added to Favorites!");
+                } else {
+                    alert("Failed to add to Favorites!");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
+</body>
+</html>

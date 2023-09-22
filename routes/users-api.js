@@ -7,7 +7,8 @@
 
 const express = require('express');
 const router  = express.Router();
-const userQueries = require('../db/queries/users');
+const db =require ('../db/connection')
+const { getUserDetailsWithListingsById } = require('../db/queries/users');
 const { getAllFavoritesByUser } = require('../db/queries/favorites');
 
 router.get('/', (req, res) => {
@@ -21,6 +22,7 @@ router.get('/', (req, res) => {
         .json({ error: err.message });
     });
 });
+
 
 router.get('/favorites', (req, res) => {
   const userId = req.session.userId;
@@ -39,5 +41,63 @@ router.get('/favorites', (req, res) => {
     });
 });
 
+router.get('/userlistings', (req, res) => {
+  const userId = req.session.userId;
+  console.log('this id comes from session.cookie: ',userId)
+   if (!userId) {
+     res.status(401).send("Error occurred. Must be logged in to have listings!");
+     return;
+   }
+
+  getUserDetailsWithListingsById(userId)
+    .then((listings) => {
+      console.log(`query data: ${listings}`);
+      res.json(listings);
+    })
+    .catch((err) => {
+      res
+        .status(500)
+        .json({ error: err.message });
+    });
+});
+
+
+// go to add new listing page
+router.get("/userlistings/new", (req, res) => {
+  const templateVars = {
+    userId: req.session.userId,
+    firstName: req.session.firstName,
+    lastName: req.session.lastName
+  };
+  res.render('post', templateVars);
+});
+
+// add new listing
+router.post('/userlistings', async (req, res) => {
+  try {
+    const queryString = `
+      INSERT INTO listings(user_id, title, description, price, category, stock, image_url, is_featured)
+      VALUES($1, $2, $3, $4, $5, $6, $7, $8)
+      RETURNING *;
+    `;
+
+    const queryParams = [
+      req.session.userId,
+      req.body.title,
+      req.body.description,
+      req.body.price,
+      req.body.category,
+      req.body.stock,
+      req.body.image_url,
+      req.body.is_featured
+    ];
+
+    await db.query(queryString, queryParams);
+
+    res.redirect('/users/userlistings');
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+});
 
 module.exports = router;

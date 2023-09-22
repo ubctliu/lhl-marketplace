@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const { createaccount, checkUserByEmailAndPassword } = require('../db/queries/users');
+const { createaccount, checkUserByEmailAndPassword,getUserDetailsWithListingsById } = require('../db/queries/users');
 const { addToFavorites, isListingFavorited, removeFromFavorites } = require('../db/queries/favorites');
 
 
@@ -98,15 +98,44 @@ router.post('/signout', (req, res) => {
   }
 });
 
+/*
 router.get('/users/:id', (req, res) => {
   const id = req.params.id;
 
   res.render('users', { id });
 });
+*/
 
 router.get('/createaccount', (req, res) => {
   res.render('createaccount');
 });
+
+router.get("/:id", (req, res) => {
+  const id= req.session.userId
+
+  getUserDetailsWithListingsById(id)
+  .then(data => {
+    if (!data) {
+      res.status(404).json({ error: "User not found" });
+    } else {
+      const templateVars = {
+        userId: id,
+        firstName: data[0].first_name,
+        lastName: data[0].last_name,
+        email: data[0].email,
+        phoneNumber: data[0].phone_number,
+        userType: data[0].user_type
+      };
+      const user = data;
+      res.render("user-details", templateVars); 
+    }
+  })
+  .catch(err => {
+    console.error("Query Error:", err);
+    res.status(500).json({ error: err.message });
+  });
+});
+
 
 router.post('/createaccount', (req, res) => {
   let { first_name, last_name, email, password, phone_number } = req.body;
