@@ -119,6 +119,7 @@ router.get("/:id", (req, res) => {
       res.status(404).json({ error: "User not found" });
     } else {
       const templateVars = {
+        userId: id,
         firstName: data[0].first_name,
         lastName: data[0].last_name,
         email: data[0].email,

@@ -47,8 +47,12 @@
             <p>User Type: <%= userType %></p>
             
             <!-- Buttons -->
-            <button class="btn btn-primary">My Messages</button>
-            <button class="btn btn-success">New Listings</button>
+            <a href ="/api/users/messages">
+                <button class="btn btn-primary">My Messages</button>
+            </a>
+            <a href ="/api/users/userlistings/new">
+                <button class="btn btn-success">New Listing</button>
+            </a>
         </div>
     </div>
 </body>

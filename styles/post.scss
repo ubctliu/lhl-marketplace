@@ -14,8 +14,7 @@ $mobile-breakpoint: 480px;
 // Reset and base styles
 body {
   font-family: $font-primary;
-  background-color: $color-bg;
-  background-image: url("https://images.unsplash.com/photo-1601598851547-4302969d0614?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2728&q=80");
+  background-color: #F2DA9C;;
   color: $color-primary;
   line-height: 1.6;
   padding-top: $nav-height;
@@ -23,7 +22,7 @@ body {
 }
 
 .container {
-  max-width: $container-width;git
+  max-width: $container-width;
   margin: 0 auto;
   padding: 20px;
   transition: padding 0.3s ease-in-out;

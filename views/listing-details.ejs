@@ -22,6 +22,7 @@
     <script src="/vendor/jquery-3.0.0.js"></script>
     <script defer src="/scripts/app.js"></script>
     <script defer src="/scripts/listings.js"></script>
+    <script defer src="/scripts/favorites.js"></script>
 
 
 </head>
@@ -42,12 +43,46 @@
             <p>Category: <%= listing.category %></p>
             <p>Price: <%= listing.price %></p>
             <p>Stock: <%= listing.stock %></p>
-            <!-- Button to send an email to the seller -->
-            <button class="btn btn-primary">Send Email to Seller</button>
-            <!-- Button to add the listing to favorites -->
-            <button class="btn btn-success">Add to Favorites</button>
+            
+            <% if (userId === listing.user_id) { %>
+                <!-- If the logged-in user is the owner of the listing -->
+                <!-- Display edit, delete, and mark as sold buttons -->
+                <button class="btn btn-warning">Edit</button>
+                <button class="btn btn-danger">Delete</button>
+                <button class="btn btn-success">Mark as Sold</button>
+            <% } else { %>
+                <!-- If the logged-in user is not the owner of the listing -->
+                <!-- Display send email and add to favorites buttons -->
+                <button class="btn btn-primary">Send Email to Seller</button>
+                <button class="btn btn-success" id="addToFavorites">Add to Favorites</button>
+            <% } %>
         </div>
 
     </div>
+    <script>
+        const addToFavoritesButton = document.getElementById("addToFavorites");
+
+     
+        addToFavoritesButton.addEventListener("click", () => {
+
+            fetch("/users/favorites", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({ listingId: <%= listing.id %> })
+            })
+            .then(response => {
+                if (response.ok) {
+                    alert("Added to Favorites!");
+                } else {
+                    alert("Failed to add to Favorites!");
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+            });
+        });
+    </script>
 </body>
 </html>

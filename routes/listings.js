@@ -37,16 +37,12 @@ router.get('/refeature', (req, res) => {
   regenerateFeaturedListings();
 });
 
-/*
-router.get('/', (req, res) => {
-  res.render('listing-details');
-});
-*/
+
+
 
 // show a specific item
 router.get("/:id", (req, res) => {
   const id = req.params.id;
-  console.log("Requested Listing ID:", id); 
 
   listingsQueries.getListingById(id)
   .then(data => {
@@ -54,8 +50,14 @@ router.get("/:id", (req, res) => {
     if (!data) {
       res.status(404).json({ error: "Listing not found" });
     } else {
-      const listing = data;
-      res.render("listing-details", { listing });
+      const templateVars = {
+        userId: req.session.userId,
+        firstName: req.session.firstName,
+        lastName: req.session.lastName,
+        listing: data
+      };
+      console.log(templateVars);
+      res.render("listing-details",  templateVars );
     }
   })
   .catch(err => {
