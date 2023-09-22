@@ -1,9 +1,9 @@
 nav {
   display: flex;
+  justify-content: space-between;
   align-items: flex-end;
-  flex-direction: row;
   color: #000000;
-  background-color: #FFFFFF;
+  background-color: #9ce9f1;
   padding: 1.5em;
   height: 75px;
   box-sizing: border-box;
@@ -11,23 +11,39 @@ nav {
   z-index: 1;
   top: 0;
   width: 100%;
+
+  .nav-left, .nav-center, .nav-right {
+    display: flex;
+    align-items: center;
+  }
+  .nav-right {
+    justify-content: flex-end;
+  }
+
   a {
     text-decoration: none;
     color: inherit;
     display: contents;
-    #logo {
+  }
+
+  #logo-link {
+    margin: 0;
+    position: static;
+  }
+
+  #logo {
     display: flex;
-    position: absolute;
     align-items: flex-end;
     flex-direction: column;
-    padding: 0em 25em 0em 45.5em;
     font-size: 1.15em;
   }
-  }
-  
+
   .links {
-    position: absolute;
-    padding: 0em 0em 0em 0em;
+    display: none; // Hide on mobile by default
+
+    a {
+      padding: 0 1em; // Optional: To give space between links
+    }
   }
 
   .menu-options {
@@ -36,6 +52,7 @@ nav {
     flex-direction: row;
     padding: 0em 0em 0em 78em;
     gap: 10px;
+
     #sign-in {
       &:hover {
         cursor: pointer;
@@ -46,29 +63,38 @@ nav {
   .dropdown-menu {
     display: flex;
     align-items: center;
-    padding: 0em 0em 0em 2.5em;
+    padding-left: 2.5em;
+
     #dropdown-menu-icon {
       font-size: 1.5em;
+
       &:hover {
         cursor: pointer;
       }
     }
 
     #dropdown-menu-content {
-        display: none;
-        position: absolute;
-        background-color: #b4afaf;
-        z-index: 1;
-        padding: 0em 1em 0em 0em;
-        font-size: medium;
-    }
+      display: none;
+      position: absolute;
+      background-color: #b4afaf;
+      z-index: 1;
+      padding-left: 1em;
+      font-size: medium;
 
-    #dropdown-menu-content a {
-      color: black;
-      // display: block;
+      a {
+        color: black;
+      }
     }
   }
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 768px) {
+  nav {
+    .links {
+      display: block; // Show traditional links on larger screens
+    }
+    .dropdown-menu {
+      display: none; // Hide the dropdown on larger screens
+    }
+  }
 }

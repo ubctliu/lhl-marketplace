@@ -26,16 +26,24 @@
         color: #FFC800;
       }
     }
-    // border: solid black 0.5px;
   }
   max-width: 1800px;
   background-color: #f2f2f2e7;
+
+  @media screen and (max-width: 767px) {
+    .listing img {
+      height: 150px;
+      width: 150px;
+    }
+  }
 }
 
 .featured-listings {
   display: flex;
   align-items: center;
   flex-direction: row;
+  flex-wrap: wrap; // added for mobile support
+  justify-content: center; // added for mobile support
   .featured-listing {
     img {
       height: 240px;
@@ -59,6 +67,13 @@
       }
       z-index: 1;
     }
+
+    @media screen and (max-width: 767px) {
+      img {
+        height: 180px;
+        width: 180px;
+      }
+    }
   }
 }
 
@@ -70,6 +85,28 @@
   color: #FFFFFF;
 }
 
-@media screen and (min-width: 1024px) {
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 
+.featured {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #FFCD29;
+  width: 100%;
+  padding: 5em 0em 0em 0em;
+
+  #featured-logo {
+    font-size: 2em;
+    margin-top: 15px;
+    margin-bottom: 15px;
+  }
+}
+
+// Adjustments for larger screens
+@media screen and (min-width: 1024px) {
 }

@@ -15,6 +15,34 @@ const getUserById = (id) => {
     });
 };
 
+const getUserDetailsWithListingsById = (id) => {
+  return db.query(
+    'SELECT users.id, users.first_name, users.last_name, users.email, users.phone_number, users.user_type, listings.id as listing_id, listings.title, listings.description, listings.price, listings.category, listings.image_url FROM users LEFT JOIN listings ON users.id = listings.user_id WHERE users.id = $1;',
+    [id]
+  )
+    .then(result => {
+      return result.rows;
+      // const userDetails = result.rows[0];
+      // if (!userDetails) {
+      //   return null; // User not found
+      // }
+
+      // const listings = result.rows.map(row => ({
+      //   listing_id: row.listing_id,
+      //   title: row.title,
+      //   description: row.description,
+      //   price: row.price,
+      //   category: row.category,
+      //   image_url: row.image_url,
+      // }));
+
+      // userDetails.listings = listings;
+      // return userDetails;
+    });
+};
+
+
+
 const checkUserByEmail = (email) => {
   return db.query('SELECT * FROM users WHERE email = $1;', [email])
     .then(email => {
@@ -24,7 +52,7 @@ const checkUserByEmail = (email) => {
 };
 
 const checkUserByEmailAndPassword = (email, password) => {
-  let trimmedEmail = email.trim().toLowerCase();
+  const trimmedEmail = email.trim().toLowerCase();
   return db.query('SELECT * FROM users WHERE email = $1 AND password = $2;', [trimmedEmail, password])
     .then(result => {
       return result.rows[0]; // This will return the user if a match is found, otherwise null.
@@ -47,4 +75,4 @@ const createaccount = (first_name, last_name, email, password, phone_number) => 
 
 };
 
-module.exports = { getUsers, getUserById, checkUserByEmail, createaccount, getUserIdByEmail, checkUserByEmailAndPassword};
+module.exports = { getUsers, getUserById, getUserDetailsWithListingsById,checkUserByEmail, createaccount, getUserIdByEmail, checkUserByEmailAndPassword};
