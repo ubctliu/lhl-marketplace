@@ -18,6 +18,20 @@ const createListingElement = (listing) => {
       </article>`;
   return $listing;
 };
+const createUserListingElement = (listing) => {
+  const $listing = `<article class="listing">
+        <header>
+        <img src=${listing.image_url}></img>
+          <h3>${listing.title} - $${listing.price}</h3>
+        </header>
+          <p class="listing-description">${escape(listing.description)}</p>
+        <footer> 
+        <div class="icons">
+        </div>
+        </footer>
+      </article>`;
+  return $listing;
+};
 
 
 const createFeaturedListingElement = (listing) => {
@@ -51,9 +65,22 @@ const renderFeaturedListings = (listings) => {
   }
 };
 
+const renderUserListings = (listings) => {
+  for (const listing of listings) {
+    const $listing = createUserListingElement(listing);
+    $(".mylistings").prepend($listing);
+  }
+};
+
 $(document).ready(() => {
   // hide drop-down menu on load
   $("#dropdown-menu-content").hide();
+
+  $.get(`/api/users/userlistings`)
+  .done(listings => {
+    //console.log(listings);
+    renderUserListings(listings);
+  });
 
   $.get("/listings")
     .done(listings => {
@@ -66,7 +93,6 @@ $(document).ready(() => {
     .done(listings => {
       renderFeaturedListings(listings);
     });
-    
 
   // reveal drop-down menu on click
   $("#dropdown-menu-icon").click((event) => {
@@ -91,7 +117,10 @@ $(document).ready(() => {
     const listingId = Number($(this).attr("listing-id"));
     $.post("/users/favorites", { listingId });
   });
-
+  $(".listings").on("click", "img", function() {
+    const listingId = $(this).closest(".listing").find(".fa-solid.fa-star").attr("listing-id");
+    window.location.href = `/listings/${listingId}`;
+  });
 
   $(document).click((event) => {
 
@@ -100,5 +129,9 @@ $(document).ready(() => {
       $("#dropdown-menu-content").hide();
     }
 
+  });
+  $(".featured-listings").on("click", "img", function() {
+    const listingId = $(this).closest(".featured-listing").find(".fa-solid.fa-star").attr("listing-id");
+    window.location.href = `/listings/${listingId}`;
   });
 });

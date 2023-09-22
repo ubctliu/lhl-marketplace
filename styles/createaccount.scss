@@ -8,10 +8,19 @@ body {
   }
   .createaccount {
     display: flex;
+    margin-top: 120px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     background-color: #F2DA9C;
+    p1 {
+      font-size: 22px;
+      margin-bottom: 20px;
+    }
+    p2 {
+      font-size: 16px;
+    }
+  
   
     form {
       display: flex;
@@ -30,8 +39,8 @@ body {
       input[type="password"],
       input[type="tel"] {
         width: 100%;
-        padding: 10px;
-        margin-bottom: 20px;
+        padding: 1px;
+        margin-bottom: 10px;
         border: 1px solid #ccc;
         border-radius: 5px;
         font-size: medium;
@@ -40,11 +49,12 @@ body {
       input[type="submit"] {
         background-color: #4CAF50;
         color: white;
-        padding: 10px 20px;
+        padding: 5px;
         border: none;
         border-radius: 5px;
         cursor: pointer;
         font-size: medium;
+        margin-bottom: 20px;
       }
   
       a {
