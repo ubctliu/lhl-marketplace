@@ -1,5 +1,4 @@
 // Client facing scripts here
-
 const createFavoritedElement = (listing) => {
   const $favoritedListing = `<article class="favorited-listing">
         <header>
@@ -8,7 +7,7 @@ const createFavoritedElement = (listing) => {
           <h3>${listing.title} - $${listing.price}</h3>
         </header>
           <p class="listing-description">${escape(listing.description)}</p>
-        <footer> 
+        <footer>
         <div class="icons">
         </div>
         </footer>

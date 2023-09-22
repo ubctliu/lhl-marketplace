@@ -41,6 +41,11 @@ router.get('/favorites', (req, res) => {
     });
 });
 
+router.get('/getuserid', (req, res) => {
+  const userId = req.session.userId;
+  res.json({ userId });
+});
+
 router.get('/userlistings', (req, res) => {
   const userId = req.session.userId;
   console.log('this id comes from session.cookie: ',userId)
@@ -59,7 +64,6 @@ router.get('/userlistings', (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
-});
 
 
 // go to add new listing page

@@ -1,7 +1,7 @@
 <nav>
   <div class="nav-left">
     <div class="links">
-      <a href="/link1">Link 1</a>
+      <a href="/">Home</a>
       <a href="/link2">Link 2</a>
     </div>
   </div>
@@ -32,11 +32,17 @@
     <% } %>
     <div class="dropdown-menu">
       <span id="dropdown-menu-icon" class="fa-solid fa-bars" style="color: black">
-        <ul id="dropdown-menu-content">
+      <ul id ="dropdown-menu-content">
+        <% if (typeof userId !== 'undefined' && userId !== null) { %>
+        <a href="/users/favorites">Favorites</a>
+        <a href="/users/messages">Messages</a>
+        <a href="#" id="signout-link">Sign out</a>
+        <%} else { %>
           <a href="/users/favorites">Favorites</a>
-          <a href="/link2">Link 2</a>
-        </ul>
-      </span>
+          <a href="/users/messages">Messages</a>
+          <% } %>
+      </ul>
+    </span>
     </div>
   </div>
 </nav>
