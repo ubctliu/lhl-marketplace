@@ -78,9 +78,3 @@ $(document).ready(() => {
 
   });
 });
-
-module.exports = {
-  escape,
-  createListingElement,
-  renderElement
-};

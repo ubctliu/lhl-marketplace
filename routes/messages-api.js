@@ -22,8 +22,25 @@ router.get('/chat-history/:userId/:sellerId', (req, res) => {
     });
 });
 
+// api path for chat-history for specific user id
 router.get('/chat-history/:userId', (req, res) => {
   const userId = req.params.userId;
+  getMessageHistoryByUserId(userId)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
+
+// generic chat-history based on logged-in user
+router.get('/chat-history', (req, res) => {
+  const userId = req.session.userId;
+  if (!userId) {
+    res.status(401).send("You need to be logged in to view your chat history!");
+    return;
+  }
   getMessageHistoryByUserId(userId)
     .then((data) => {
       res.json(data);

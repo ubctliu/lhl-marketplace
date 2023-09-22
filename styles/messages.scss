@@ -5,42 +5,89 @@ body {
   align-items: center;
   background-color: #F2DA9C;
 }
+.chat-title {
+  font-size: 1.5em;
+  padding: 0em 0em 10em 5em;
+  img {
+    max-height: 220px;
+    max-width: 220px;
+    padding: 0em 0em 0em 2em;
+  }
+}
 
 .chat-container {
   display: flex;
   flex-direction: column;
   justify-content: end;
-  background: rgb(209, 206, 206);
+  background-color: #c7c7cc;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
   width: 60%;
   height: 80%;
   min-height: 800px;
-  padding: 5em 10em 0em 10em;
+  padding: 5em 10em 0em 40em;
+  .focused-chat-container {
+
+    height: 100%;
+    min-height: 800px;
+    background-color: #E5E5EA;
+    padding: 0em 0em 0em 0em;
+    min-width: 510px;
   .chat-history {
     background: rgb(179, 175, 175);
     width: 30%;
     height: 80%;
     min-height: 800px;
-    padding: 5em 10em 0em 10em;
+    padding: 5em 10em 0em 20em;
   }
+  .chat-message-box {
+    padding: 9em 0em 0em 6.5em;
+    .user-chat-record {
+      max-width: 300px;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: #E5E5EA;
+      position: relative;
+      background-color: #007AFF;
+      color: white;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 5px;
+    }
+    .other-chat-record {
+      max-width: 300px;
+      margin: 10px;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: #E5E5EA;
+      position: relative;
+      background-color: #E5E5EA;
+      border: 1px solid #C4C4C4;
+      border-radius: 10px;
+      padding: 10px;
+      margin-bottom: 5px;
+    }
   .message-box {
     display: flex;
     align-items: center;
-    width: 300px; /* Set your desired width */
-    font-size: 22px; /* Set your desired font size */
-    box-sizing: border-box; /* Include padding and border in the total width/height */
+    width: 300px;
+    font-size: 22px;
+    box-sizing: border-box;
     position: relative;
-    padding: 0em 0em 0em 13em;
+    padding: 0em 0em 0em 0.5em;
     .message-input {
       flex: 1;
       padding: 10px;
     }
     .fa-solid.fa-paper-plane {
       position: absolute;
-      right: -12em;
+      right: 0.5em;
       top: 50%;
       transform: translateY(-50%);
     }
   }
+}
+}
 }
 
 #error-msg {

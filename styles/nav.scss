@@ -41,6 +41,9 @@ nav {
         cursor: pointer;
       }
     }
+    #search-bar {
+      z-index: 1;
+    }
   }
 
   .dropdown-menu {
