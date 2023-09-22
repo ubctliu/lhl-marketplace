@@ -34,15 +34,12 @@ nav {
     display: flex;
     align-items: flex-end;
     flex-direction: row;
-    padding: 0em 0em 0em 89em;
+    padding: 0em 0em 0em 78em;
     gap: 10px;
     #sign-in {
       &:hover {
         cursor: pointer;
       }
-    }
-    #search-bar {
-      z-index: 1;
     }
   }
 

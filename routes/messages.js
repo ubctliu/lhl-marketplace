@@ -7,12 +7,21 @@
 
 const express = require('express');
 const router  = express.Router();
+const { addMessageToDatabase } = require('../db/queries/messages');
 
-// router.get('/', (req, res) => {
-// });
-
-// router.get('/:userId', (req, res) => {
-  
-// });
+router.post('/sendmessage', (req, res) => {
+  const userId = req.body.userId;
+  const sellerId = req.body.sellerId;
+  const listingId = req.body.listingId;
+  const message = req.body.message;
+  const currentPrice = req.body.price;
+  addMessageToDatabase(userId, sellerId, listingId, message, currentPrice)
+    .then((data) => {
+      res.status(200).send("Successfully added message to the database.");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+});
 
 module.exports = router;

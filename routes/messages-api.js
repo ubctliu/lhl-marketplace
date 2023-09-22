@@ -7,8 +7,20 @@
 
 const express = require('express');
 const router  = express.Router();
-const { getMessageHistoryByUserId, getMessageHistoryByBothUserIds } = require('../db/queries/messages');
+const { getMessageHistoryByUserId, getMessageHistoryByBothUserIds, getMessageHistoryByAllIds} = require('../db/queries/messages');
 
+router.get('/chat-history/:userId/:sellerId/:chatId', (req, res) => {
+  const userId = req.params.userId;
+  const sellerId = req.params.sellerId;
+  const chatId = req.params.chatId;
+  getMessageHistoryByAllIds(userId, sellerId, chatId)
+    .then((data) => {
+      res.json(data);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
+});
 
 router.get('/chat-history/:userId/:sellerId', (req, res) => {
   const userId = req.params.userId;
@@ -49,5 +61,6 @@ router.get('/chat-history', (req, res) => {
       console.error(err);
     });
 });
+
 
 module.exports = router;

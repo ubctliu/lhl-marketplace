@@ -39,5 +39,9 @@ router.get('/favorites', (req, res) => {
     });
 });
 
+router.get('/getuserid', (req, res) => {
+  const userId = req.session.userId;
+  res.json({ userId });
+});
 
 module.exports = router;

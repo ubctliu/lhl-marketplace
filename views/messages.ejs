@@ -28,20 +28,24 @@
 <%- include('partials/_nav') %>
 <% if (userId) {%>
 <section class="chat-container">
+  <div class="sidebar">
+    <ul class="chat-list">
+    </ul>
+  </div>
   <section class="focused-chat-container">
   <section class="chat-title">
   </section>
   <section class="chat-message-box">
   <section class ="chat-records">
   </section>
-  <form>
+  <form action="/messages/sendmessage" method="post" id="message-form">
   <section class="message-box">
-  <input type="text" class="message-input" placeholder="Send a message.." label="message-box">
+  <input type="text" class="message-input" name="message" placeholder="Send a message.." label="message-box">
   <span class="fa-solid fa-paper-plane"></span>
   </section>
+  </form>
 </section>
 </section>
-</form>
 </section>
 <% } else {%>
   <h3 id="error-msg">You must be logged in to view your messages!</h3>
