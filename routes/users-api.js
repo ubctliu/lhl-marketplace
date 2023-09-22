@@ -48,11 +48,10 @@ router.get('/getuserid', (req, res) => {
 
 router.get('/userlistings', (req, res) => {
   const userId = req.session.userId;
-  console.log('this id comes from session.cookie: ',userId)
-   if (!userId) {
-     res.status(401).send("Error occurred. Must be logged in to have listings!");
-     return;
-   }
+  if (!userId) {
+    res.status(401).send("Error occurred. Must be logged in to have listings!");
+    return;
+  }
 
   getUserDetailsWithListingsById(userId)
     .then((listings) => {
@@ -64,6 +63,7 @@ router.get('/userlistings', (req, res) => {
         .status(500)
         .json({ error: err.message });
     });
+});
 
 
 // go to add new listing page
