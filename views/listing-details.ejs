@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="/styles/nav.css" />
     <link rel="stylesheet" href="/styles/listings.css" />
     <link rel="stylesheet" href="/styles/listing-details.css" />
+    <link rel="stylesheet" href="/styles/edit-listing.scss" />
     <link rel="stylesheet" href="/styles/layout.css" />
   
     <!-- Font Awesome -->
@@ -47,9 +48,16 @@
             <% if (userId === listing.user_id) { %>
                 <!-- If the logged-in user is the owner of the listing -->
                 <!-- Display edit, delete, and mark as sold buttons -->
-                <button class="btn btn-warning">Edit</button>
-                <button class="btn btn-danger">Delete</button>
-                <button class="btn btn-success">Mark as Sold</button>
+                <a href="/listings/edit/<%= listing.id %>">
+                    <button>Edit listing</button>
+                    <div id="editFormContainer"></div>
+                </a>
+                <form action="/listings/delete/<%= listing.id %>" method="POST">
+                    <button class="btn btn-danger" type="submit">Delete</button>
+                </form>
+                <form action="/listings/mark-as-sold/<%= listing.id %>" method="POST">
+                    <button class="btn btn-success" type="submit">Mark as Sold</button>
+                </form>
             <% } else { %>
                 <!-- If the logged-in user is not the owner of the listing -->
                 <!-- Display send email and add to favorites buttons -->
@@ -62,7 +70,7 @@
     <script>
         const addToFavoritesButton = document.getElementById("addToFavorites");
 
-     
+        
         addToFavoritesButton.addEventListener("click", () => {
 
             fetch("/users/favorites", {
@@ -83,6 +91,7 @@
                 console.error("Error:", error);
             });
         });
+        
     </script>
 </body>
 </html>

@@ -139,7 +139,6 @@ const getAllFeatured = (limit = 5) => {
   `;
   }
 
-
   queryParams.push(Number(limit));
   queryString += `
   LIMIT $${queryParams.length};
