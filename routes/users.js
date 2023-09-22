@@ -120,29 +120,32 @@ router.get('/createaccount', (req, res) => {
 });
 
 router.get("/:id", (req, res) => {
-  const id= req.session.userId
-
+  const id = req.params.id;
+  
   getUserDetailsWithListingsById(id)
-  .then(data => {
-    if (!data) {
-      res.status(404).json({ error: "User not found" });
-    } else {
-      const templateVars = {
-        userId: id,
-        firstName: data[0].first_name,
-        lastName: data[0].last_name,
-        email: data[0].email,
-        phoneNumber: data[0].phone_number,
-        userType: data[0].user_type
-      };
-      const user = data;
-      res.render("user-details", templateVars); 
-    }
-  })
-  .catch(err => {
-    console.error("Query Error:", err);
-    res.status(500).json({ error: err.message });
-  });
+    .then(data => {
+      console.log(data);
+      if (!data) {
+        res.status(404).json({ error: "User not found" });
+      } else {
+        const templateVars = {
+          searchedUserId: Number(id),
+          searchedFirstName: data[0].first_name,
+          searchedLastName: data[0].last_name,
+          email: data[0].email,
+          phoneNumber: data[0].phone_number,
+          userType: data[0].user_type,
+          userId: req.session.userId,
+          firstName: req.session.firstName,
+          lastName: req.session.lastName
+        };
+        res.render("user-details", templateVars);
+      }
+    })
+    .catch(err => {
+      console.error("Query Error:", err);
+      res.status(500).json({ error: err.message });
+    });
 });
 
 

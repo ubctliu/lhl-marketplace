@@ -18,8 +18,8 @@
     <% if (typeof userId !== 'undefined' && userId !== null) { %>
       <span class="logged">
         Hello, <%= firstName %><%= lastName %>
-        <a href="/users/userlistings">
-          <button>My profile</button>
+        <a href="/users/<%= userId %>">
+          <button id="profile-button">My profile</button>
         </a>
       </span>
       <form method="POST" action="/users/signout">

@@ -53,10 +53,10 @@ $(document).ready(() => {
 
   // render normal listings
   $.get(`/api/users/userlistings`)
-  .done(listings => {
+    .done(listings => {
     //console.log(listings);
-    renderUserListings(listings);
-  });
+      renderUserListings(listings);
+    });
   
   $.get("/listings")
     .done(listings => {
