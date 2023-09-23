@@ -1,4 +1,4 @@
-const db = require ('../connection')
+const db = require('../connection');
 // get an indivual list by it's id
 const getListingById = (id) => {
   return db.query(`
@@ -7,9 +7,9 @@ const getListingById = (id) => {
     JOIN users AS u ON l.user_id = u.id
     WHERE l.id = $1
   `, [id])
-  .then((result) => {
-    return result.rows[0];
-  });
+    .then((result) => {
+      return result.rows[0];
+    });
 };
 // get all listing by users
 const getListingsByUser = (userId) => {
@@ -22,14 +22,14 @@ const getListingsByUser = (userId) => {
 //delete listing in mylistings
 const deleteListing = (listingId) => {
   return db.query('UPDATE listings SET is_deleted = true WHERE id = $1', [listingId])
-  .then(() => {
+    .then(() => {
   
-    return 'Listing marked as deleted successfully';
-  })
-  .catch(error => {
+      return 'Listing marked as deleted successfully';
+    })
+    .catch(error => {
     
-    throw error;
-  });
+      throw error;
+    });
 };
 
 // adds new item to listings

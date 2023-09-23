@@ -7,7 +7,7 @@
 
 const express = require('express');
 const router  = express.Router();
-const db = require ('../db/connection');
+const db = require('../db/connection');
 const { getAllListings, getAllFeatured, regenerateFeaturedListings } = require('../db/queries/listings');
 const listingsQueries = require('../db/queries/listings-queries');
 
@@ -42,21 +42,21 @@ router.get("/edit/:id", (req, res) => {
   const id = req.params.id;
 
   listingsQueries.getListingById(id)
-  .then(data => {
-    console.log("Query Result:", data);
-    if (!data) {
-      res.status(404).json({ error: "Listing not found" });
-    } else {
-      const templateVars = {
-        userId: req.session.userId,
-        firstName: req.session.firstName,
-        lastName: req.session.lastName,
-        listing: data
-      };
-      console.log(templateVars);
-  res.render("edit-listing", templateVars);
-    }
-  });
+    .then(data => {
+      console.log("Query Result:", data);
+      if (!data) {
+        res.status(404).json({ error: "Listing not found" });
+      } else {
+        const templateVars = {
+          userId: req.session.userId,
+          firstName: req.session.firstName,
+          lastName: req.session.lastName,
+          listing: data
+        };
+        console.log(templateVars);
+        res.render("edit-listing", templateVars);
+      }
+    });
 });
 
 router.post('/delete/:id', (req, res) => {
@@ -100,25 +100,25 @@ router.get("/:id", (req, res) => {
   const id = req.params.id;
 
   listingsQueries.getListingById(id)
-  .then(data => {
-    console.log("Query Result:", data);
-    if (!data) {
-      res.status(404).json({ error: "Listing not found" });
-    } else {
-      const templateVars = {
-        userId: req.session.userId,
-        firstName: req.session.firstName,
-        lastName: req.session.lastName,
-        listing: data
-      };
-      console.log(templateVars);
-      res.render("listing-details",  templateVars );
-    }
-  })
-  .catch(err => {
-    console.error("Query Error:", err);
-    res.status(500).json({ error: err.message });
-  });
+    .then(data => {
+      console.log("Query Result:", data);
+      if (!data) {
+        res.status(404).json({ error: "Listing not found" });
+      } else {
+        const templateVars = {
+          userId: req.session.userId,
+          firstName: req.session.firstName,
+          lastName: req.session.lastName,
+          listing: data
+        };
+        console.log(templateVars);
+        res.render("listing-details",  templateVars);
+      }
+    })
+    .catch(err => {
+      console.error("Query Error:", err);
+      res.status(500).json({ error: err.message });
+    });
 });
 
 

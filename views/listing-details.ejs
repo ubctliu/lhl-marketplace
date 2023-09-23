@@ -24,6 +24,7 @@
     <script defer src="/scripts/app.js"></script>
     <script defer src="/scripts/listings.js"></script>
     <script defer src="/scripts/favorites.js"></script>
+    <script defer src="/scripts/messages.js"></script>
 
 
 </head>
@@ -61,7 +62,9 @@
             <% } else { %>
                 <!-- If the logged-in user is not the owner of the listing -->
                 <!-- Display send email and add to favorites buttons -->
-                <button class="btn btn-primary">Send Email to Seller</button>
+                <a href="/messages/send/<%= listing.user_id %>/<%= listing.id %>">
+                <button class="start-new-chat-button"">Send Email to Seller</button>
+                </a>
                 <button class="btn btn-success" id="addToFavorites">Add to Favorites</button>
             <% } %>
         </div>

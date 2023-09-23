@@ -67,6 +67,18 @@ const renderChatRecords = (records, listingId) => {
   $('.chat-title').prepend($chatTitle);
 };
 
+const renderEmptyChat = (listing) => {
+  $('.chat-records').empty();
+  $('.chat-title').empty();
+  const $chatTitle = createChatTitle(listing);
+  if (!seenChatIds.has(listing.id)) {
+    const $chatItem = createChatSidebarUser(listing);
+    $('.chat-list').prepend($chatItem);
+  }
+  seenChatIds.add(listing.id);
+  $('.chat-title').prepend($chatTitle);
+};
+
 $(document).ready(() => {
   // declare templateVars default values
   const templateVars = {
@@ -81,6 +93,27 @@ $(document).ready(() => {
     .done((data) => {
       currentUserId = data.userId;
     });
+
+  const chatHistoryExists = $('#listing-data-carrier').data('chat-history');
+  // if chat history doesn't exist already, render an empty chat box
+  if (!chatHistoryExists) {
+    const listing = {
+      id: $('#listing-data-carrier').data('listing-id'),
+      sender_id: $('#listing-data-carrier').data('user-id'),
+      receiver_id: $('#listing-data-carrier').data('seller-id'),
+      title: $('#listing-data-carrier').data('title'),
+      description: $('#listing-data-carrier').data('description'),
+      price: $('#listing-data-carrier').data('price'),
+      category: $('#listing-data-carrier').data('category'),
+      stock: $('#listing-data-carrier').data('stock'),
+      is_featured: $('#listing-data-carrier').data('is-featured'),
+      image_url: $('#listing-data-carrier').data('image-url'),
+      is_deleted: $('#listing-data-carrier').data('is-deleted'),
+      first_name: $('#listing-data-carrier').data('first-name'),
+      last_name: $('#listing-data-carrier').data('last-name')
+    };
+    renderEmptyChat(listing);
+  }
 
   // call api to render latest chat
   $.get('/api/messages/chat-history')
@@ -111,12 +144,31 @@ $(document).ready(() => {
     // fetch the chat history for the selected chat
     $.get(`/api/messages/chat-history/${userId}/${sellerId}/${listingId}`)
       .done((chatHistory) => {
-        renderChatRecords(chatHistory, listingId);
+        if (typeof chatHistory === 'object' && !Array.isArray(chatHistory)) {
+          const listing = {
+            id: $('#listing-data-carrier').data('listing-id'),
+            user_id: $('#listing-data-carrier').data('user-id'),
+            title: $('#listing-data-carrier').data('title'),
+            description: $('#listing-data-carrier').data('description'),
+            price: $('#listing-data-carrier').data('price'),
+            category: $('#listing-data-carrier').data('category'),
+            stock: $('#listing-data-carrier').data('stock'),
+            is_featured: $('#listing-data-carrier').data('is-featured'),
+            image_url: $('#listing-data-carrier').data('image-url'),
+            is_deleted: $('#listing-data-carrier').data('is-deleted'),
+            first_name: $('#listing-data-carrier').data('first-name'),
+            last_name: $('#listing-data-carrier').data('last-name')
+          };
+          renderEmptyChat(listing);
+        } else {
+          renderChatRecords(chatHistory, listingId);
+        }
       })
       .fail((err) => {
         console.error(err);
       });
   });
+
 
   // post a new message upon pressing enter on the textbox
   $('.message-input').keydown(function(event) {
