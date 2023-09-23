@@ -21,7 +21,7 @@
     <input id ="search-bar" type="text" placeholder="Search..">
     <% if (typeof userId !== 'undefined' && userId !== null) { %>
       <span class="logged">
-        <span>Hello, <%= firstName %><%= lastName %></span>
+        <span>Hello, <%= firstName %> <%= lastName %></span>
       </form>
     <%} else { %>
         <a href="/users/signin">
