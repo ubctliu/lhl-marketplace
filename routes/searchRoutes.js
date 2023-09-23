@@ -25,26 +25,26 @@ router.get("/results/:query", async (req, res) => {
 
 
 router.post("/search", (req, res) => {
- try {
-  console.log("Searching for:", req.body); // Debug liner
-   res.redirect(`results/${req.body.searchTerm}`);
-} catch (err) {
-  res.status(500).send('Server Error');
-}
+  try {
+    console.log("Searching for:", req.body); // Debug liner
+    res.redirect(`results/${req.body.searchTerm}`);
+  } catch (err) {
+    res.status(500).send('Server Error');
+  }
 });
 
 
 router.get("/advsearch", (req, res) => {
-  res.render('advsearch');
+  res.render('advSearch');
 });
 
 router.post("/advsearch", (req, res) => {
   console.log("Searching for:", req.body); // Debug liner
   search.advSearch(req.body)
-  .then(results => {
-    console.log("Search results:", results); // Debug line
-    res.redirect(`/listings/${results[0].id}`);
-});
+    .then(results => {
+      console.log("Search results:", results); // Debug line
+      res.redirect(`/listings/${results[0].id}`);
+    });
 });
 
 module.exports = router;
