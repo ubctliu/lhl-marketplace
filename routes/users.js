@@ -58,6 +58,7 @@ router.post('/favorites', (req, res) => {
 router.post('/signin', (req, res) => {
   let email = req.body.email;
   let password = req.body.password;
+  console.log(req.body);
 
   if (!email || !password) {
     console.log("Username and/or Password Empty");
@@ -127,7 +128,7 @@ router.get("/:id", (req, res) => {
         userType: data[0].user_type
       };
       const user = data;
-      res.render("user-details", templateVars); 
+      res.render("user-details", templateVars);
     }
   })
   .catch(err => {
@@ -139,7 +140,7 @@ router.get("/:id", (req, res) => {
 
 router.post('/createaccount', (req, res) => {
   let { first_name, last_name, email, password, phone_number } = req.body;
-  
+
   // if one or more required field(s) left empty it will throw an error
   if (!first_name || !last_name || !email || !password || !phone_number) {
     return res.status(400).send("Error 400: One or more fields are empty.");
@@ -153,7 +154,7 @@ router.post('/createaccount', (req, res) => {
     phone_number,
   )
     .then(newUser => {
-      
+
       console.log("User account created successfully!");
       res.redirect('/'); // Redirect to the home page
     })

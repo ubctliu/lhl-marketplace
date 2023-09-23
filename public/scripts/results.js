@@ -17,13 +17,14 @@ return $searchRes;
 const renderRes = (results) => {
   for (const result of results) {
     const $res = displayResults(result);
-    $("result-listings").prepend($listing);
+    $("#result-listings").prepend($res);
   }
 };
 
 $(document).ready(() => {
-  $.get('/api/search')
+  $.get('/search')
     .done((results) => {
+      console.log(results);
       renderRes(results);
     });
 });

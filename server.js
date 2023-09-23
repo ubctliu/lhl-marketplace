@@ -44,9 +44,8 @@ const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const listingsRoutes = require('./routes/listings');
 const listingApiRoutes = require("./routes/listings-api");
-const postRoutes = require("./routes/postRoutes").router;
-const searchRoutes = require("./routes/searchRoutes").router;
-
+const postRoutes = require("./routes/postRoutes");
+const searchRoutes = require("./routes/searchRoutes");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -56,9 +55,8 @@ app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/listings', listingsRoutes);
 app.use("/api/listings", listingApiRoutes);
-app.use("/post", postRoutes);
-app.use("/search", searchRoutes);
-
+app.use("/", postRoutes);
+app.use("/", searchRoutes);
 // Note: mount other resources here, using the same pattern above
 
 // Home page
@@ -71,6 +69,8 @@ app.get('/', (req, res) => {
     firstName: req.session.firstName,
     lastName: req.session.lastName
   };
+  console.log(req.session);
+
   res.render('index', templateVars);
 });
 
