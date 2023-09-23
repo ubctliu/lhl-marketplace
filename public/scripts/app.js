@@ -115,6 +115,11 @@ $(document).ready(() => {
     window.location.href = `/listings/${listingId}`;
   });
 
+  $(".result-listings").on("click", "img", function() {
+    const listingId = $(this).closest(".search-results").find(".fa-solid.fa-star").attr("listing-id");
+    window.location.href = `/listings/${listingId}`;
+  });
+
   $(document).click((event) => {
 
     // click occurred outside the dropdown menu and button to close the dropdown menu
