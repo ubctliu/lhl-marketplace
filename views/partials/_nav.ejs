@@ -6,6 +6,7 @@
         <a href="/users/<%= userId %>">My Profile</a>
         <a href="/users/messages">My Messages</a>
       <a href="/users/favorites">My Favorites</a>
+      <a href="/advsearch">Advanced Search</a>
       <% } %>
     </div>
   </div>
@@ -22,12 +23,11 @@
         <input id="search-input" type="text" name = "searchTerm" placeholder="Search...">
         <button id="search-button" type="submit"><i class="fa-solid fa-search"></i></button>
     </form>
-
     <% if (typeof userId !== 'undefined' && userId !== null) { %>
       <span class="logged">
         <span>Hello, <%= firstName %> <%= lastName %></span>
       </form>
-    <% } else { %>
+    <%} else { %>
         <a href="/users/signin">
         <button id="sign-in">Sign in</button>
         </a>
