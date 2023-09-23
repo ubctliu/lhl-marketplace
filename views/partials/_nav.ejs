@@ -3,9 +3,9 @@
     <div class="links">
       <a href="/">Home</a>
       <% if (typeof userId !== 'undefined' && userId !== null) { %>
+        <a href="/users/<%= userId %>">My Profile</a>
+        <a href="/users/messages">My Messages</a>
       <a href="/users/favorites">My Favorites</a>
-      <a href="/users/messages">My Messages</a>
-      <a href="/users/<%= userId %>">My Profile</a>
       <% } %>
     </div>
   </div>
