@@ -5,17 +5,26 @@ const advSearch = (search) => {
   SELECT *
   FROM listings
   WHERE
-      title LIKE $1
-      OR description LIKE $1
-      OR category LIKE $1
+      (title ILIKE $1 OR description ILIKE $2 OR category ILIKE $3)
+      AND price BETWEEN $4 AND $5
   ORDER BY title;
-`;
-return db.query(query, [`%${search}%`])
-  .then((res) => {
-    return res.rows;
-  })
-  .catch(err => console.log(err));
+  `;
+
+  const values = [
+    `%${search.itemName}%`,
+    `%${search.descriptionWord}%`,
+    search.category,
+    parseFloat(search.minPrice),
+    parseFloat(search.maxPrice)
+  ];
+
+  return db.query(query, values)
+    .then((res) => {
+      return res.rows;
+    })
+    .catch(err => console.log(err));
 };
+
 
 const regSearch = (search) => {
   const query = `
