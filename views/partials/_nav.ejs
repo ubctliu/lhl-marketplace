@@ -18,12 +18,16 @@
 
   <div class="nav-right">
     <div class="menu-options">
-    <input id ="search-bar" type="text" placeholder="Search..">
+      <form action="/search" method="post">
+        <input id="search-input" type="text" name = "searchTerm" placeholder="Search...">
+        <button id="search-button" type="submit"><i class="fa-solid fa-search"></i></button>
+    </form>
+
     <% if (typeof userId !== 'undefined' && userId !== null) { %>
       <span class="logged">
         <span>Hello, <%= firstName %> <%= lastName %></span>
       </form>
-    <%} else { %>
+    <% } else { %>
         <a href="/users/signin">
         <button id="sign-in">Sign in</button>
         </a>
