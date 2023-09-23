@@ -40,7 +40,6 @@ nav {
 
   .links {
     display: none; // Hide on mobile by default
-
     a {
       padding: 0 1em; // Optional: To give space between links
     }
@@ -61,7 +60,7 @@ nav {
   .dropdown-menu {
     display: flex;
     align-items: center;
-    padding-left: 2.5em;
+    padding-left: 1.5em;
 
     #dropdown-menu-icon {
       font-size: 1.5em;
@@ -78,21 +77,41 @@ nav {
       z-index: 1;
       padding-left: 1em;
       font-size: medium;
-
+      background-color: white;
       a {
         color: black;
       }
     }
+    
   }
 }
 
 @media screen and (min-width: 768px) {
   nav {
     .links {
-      display: block; // Show traditional links on larger screens
+      display: flex;
+      justify-content: flex-start;
+      a {
+        margin-right: 10px;
+        text-decoration: none;
+        box-shadow: inset 0 0 0 0 #54b3d6;
+        color: #000000;
+        margin: 0 -.25rem;
+        padding: 0 .25rem;
+        transition: color .3s ease-in-out, box-shadow .3s ease-in-out;
+        &:hover {
+          box-shadow: inset 100px 0 0 0 #54b3d6;
+          color: #007bff;
+        }
+      }
     }
     .dropdown-menu {
-      display: none; // Hide the dropdown on larger screens
+      padding-right: 2em;
+      // display: none; // Hide the dropdown on larger screens
     }
+  }
+
+  .logged {
+    display: flex;
   }
 }

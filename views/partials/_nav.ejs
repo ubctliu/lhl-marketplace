@@ -2,7 +2,11 @@
   <div class="nav-left">
     <div class="links">
       <a href="/">Home</a>
-      <a href="/link2">Link 2</a>
+      <% if (typeof userId !== 'undefined' && userId !== null) { %>
+      <a href="/users/favorites">My Favorites</a>
+      <a href="/users/messages">My Messages</a>
+      <a href="/users/<%= userId %>">My Profile</a>
+      <% } %>
     </div>
   </div>
 
@@ -17,13 +21,7 @@
     <input id ="search-bar" type="text" placeholder="Search..">
     <% if (typeof userId !== 'undefined' && userId !== null) { %>
       <span class="logged">
-        Hello, <%= firstName %><%= lastName %>
-        <a href="/users/<%= userId %>">
-          <button id="profile-button">My profile</button>
-        </a>
-      </span>
-      <form method="POST" action="/users/signout">
-        <button type="submit">Sign out</button>
+        <span>Hello, <%= firstName %><%= lastName %></span>
       </form>
     <%} else { %>
         <a href="/users/signin">
