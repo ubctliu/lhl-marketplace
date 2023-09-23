@@ -73,7 +73,9 @@ const renderEmptyChat = (listing) => {
   const $chatTitle = createChatTitle(listing);
   if (!seenChatIds.has(listing.id)) {
     const $chatItem = createChatSidebarUser(listing);
-    $('.chat-list').prepend($chatItem);
+    if (!$chatItem.includes("undefined")) {
+      $('.chat-list').prepend($chatItem);
+    }
   }
   seenChatIds.add(listing.id);
   $('.chat-title').prepend($chatTitle);
