@@ -4,26 +4,19 @@ const post = require('../db/queries/post');
 const { getUserDetailsWithListingsById } = require('../db/queries/users');
 
 router.get("/post", (req, res) => {
-  getUserDetailsWithListingsById(req.session.userId)
-    .then((data) => {
-      console.log(data);
-      const templateVars = {
-        user_type: data[0].user_type,
-        userId: req.session.userId,
-        firstName: req.session.firstName,
-        lastName: req.session.lastName
-      };
-      if (data[0].user_type === 'seller') {
-        res.render("post", templateVars);
-      } else {
-        res.redirect("/");
-      }
-    })
-    .catch((err) => {
-      console.error(err);
-      res.status(500).send('Internal Server Error');
-    });
+  const templateVars = {
+    user_type: req.session.userType,
+    userId: req.session.userId,
+    firstName: req.session.firstName,
+    lastName: req.session.lastName
+  };
+  if (templateVars.user_type === 'seller') {
+    res.render("post", templateVars);
+  } else {
+    res.redirect("/");
+  }
 });
+
 
 router.post("/post", (req, res) => {
   console.log(req.body);
@@ -31,7 +24,7 @@ router.post("/post", (req, res) => {
     .then((data) => {
       console.log(data);
       const templateVars = {
-        user_type: data[0].user_type,
+        user_type: req.session.userType,
         userId: req.session.userId,
         firstName: req.session.firstName,
         lastName: req.session.lastName,

@@ -27,7 +27,9 @@ router.get('/messages', (req, res) => {
   const templateVars = {
     userId: req.session.userId,
     firstName: req.session.firstName,
-    lastName: req.session.lastName
+    lastName: req.session.lastName,
+    userType: req.session.userType,
+    user_type: req.session.userType
   };
   res.render('messages', templateVars);
 });
@@ -49,7 +51,8 @@ router.get('/favorites', (req, res) => {
   const templateVars = {
     userId: req.session.userId,
     firstName: req.session.firstName,
-    lastName: req.session.lastName
+    lastName: req.session.lastName,
+    user_type: req.session.userType
   };
   res.render('favorites', templateVars);
 });
@@ -96,10 +99,12 @@ router.post('/signin', (req, res) => {
         req.session.userId = user.id;
         req.session.firstName = user.first_name;
         req.session.lastName = user.last_name;
+        req.session.userType = user.user_type;
         const templateVars = {
           userId: req.session.userId,
           firstName: req.session.firstName,
-          lastName: req.session.lastName
+          lastName: req.session.lastName,
+          user_type: req.session.userType
         };
         res.render('index', templateVars);
       } else {
@@ -152,7 +157,8 @@ router.get("/:id", (req, res) => {
           userId: req.session.userId,
           firstName: req.session.firstName,
           lastName: req.session.lastName,
-          listing: data
+          listing: data,
+          user_type: req.session.userType
         };
         res.render("user-details", templateVars);
       }

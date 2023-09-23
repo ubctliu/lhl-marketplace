@@ -51,7 +51,8 @@ router.get("/edit/:id", (req, res) => {
           userId: req.session.userId,
           firstName: req.session.firstName,
           lastName: req.session.lastName,
-          listing: data
+          listing: data,
+          user_type: req.session.userType
         };
         console.log(templateVars);
         res.render("edit-listing", templateVars);
@@ -109,7 +110,8 @@ router.get("/:id", (req, res) => {
           userId: req.session.userId,
           firstName: req.session.firstName,
           lastName: req.session.lastName,
-          listing: data
+          listing: data,
+          user_type: req.session.userType
         };
         console.log(templateVars);
         res.render("listing-details",  templateVars);

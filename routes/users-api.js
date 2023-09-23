@@ -78,7 +78,8 @@ router.get("/userlistings/new", (req, res) => {
   const templateVars = {
     userId: req.session.userId,
     firstName: req.session.firstName,
-    lastName: req.session.lastName
+    lastName: req.session.lastName,
+    user_type: req.session.userType
   };
   res.render('post', templateVars);
 });
