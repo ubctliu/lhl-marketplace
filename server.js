@@ -43,9 +43,7 @@ const userApiRoutes = require('./routes/users-api');
 const widgetApiRoutes = require('./routes/widgets-api');
 const usersRoutes = require('./routes/users');
 const listingsRoutes = require('./routes/listings');
-const listingApiRoutes = require("./routes/listings-api");
-const postRoutes = require("./routes/postRoutes");
-const searchRoutes = require("./routes/searchRoutes");
+const listingApiRoutes = require('./routes/listings-api');
 const messagesRoutes = require('./routes/messages');
 const messageApiRoutes = require('./routes/messages-api');
 
@@ -56,9 +54,7 @@ app.use('/api/users', userApiRoutes);
 app.use('/api/widgets', widgetApiRoutes);
 app.use('/users', usersRoutes);
 app.use('/listings', listingsRoutes);
-app.use("/api/listings", listingApiRoutes);
-app.use("/", postRoutes);
-app.use("/", searchRoutes);
+app.use('/api/listings', listingApiRoutes);
 app.use('/messages', messagesRoutes);
 app.use('/api/messages', messageApiRoutes);
 
@@ -74,8 +70,6 @@ app.get('/', (req, res) => {
     firstName: req.session.firstName,
     lastName: req.session.lastName
   };
-  console.log(req.session);
-
   res.render('index', templateVars);
 });
 
