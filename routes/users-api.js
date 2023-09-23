@@ -7,12 +7,12 @@
 
 const express = require('express');
 const router  = express.Router();
-const db =require ('../db/connection')
-const { getUserDetailsWithListingsById } = require('../db/queries/users');
+const db = require('../db/connection');
+const { getUserDetailsWithListingsById, getUsers } = require('../db/queries/users');
 const { getAllFavoritesByUser } = require('../db/queries/favorites');
 
 router.get('/', (req, res) => {
-  userQueries.getUsers()
+  getUsers()
     .then(users => {
       res.json({ users });
     })
@@ -41,14 +41,25 @@ router.get('/favorites', (req, res) => {
     });
 });
 
+router.get('/getuserid', (req, res) => {
+  const userId = req.session.userId;
+  res.json({ userId });
+});
+
+router.get('/getusername', (req, res) => {
+  const userId = req.session.userId;
+  const firstName = req.session.firstName;
+  const lastName = req.session.lastName;
+  res.json({ userId, firstName, lastName });
+});
+
+
 router.get('/userlistings', (req, res) => {
   const userId = req.session.userId;
-  console.log('this id comes from session.cookie: ',userId)
-   if (!userId) {
-     res.status(401).send("Error occurred. Must be logged in to have listings!");
-     return;
-   }
-
+  if (!userId) {
+    res.status(401).send("Error occurred. Must be logged in to have listings!");
+    return;
+  }
   getUserDetailsWithListingsById(userId)
     .then((listings) => {
       console.log(`query data: ${listings}`);

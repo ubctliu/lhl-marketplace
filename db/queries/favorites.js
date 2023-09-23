@@ -6,7 +6,7 @@ const addToFavorites = (userId, listingId) => {
   }
 
   return db.query(`
-  INSERT INTO favorites (user_id, listing_id)
+  INSERT INTO favorites(user_id, listing_id)
   VALUES($1, $2)
   RETURNING *;`, [userId, Number(listingId)])
     .then((data) =>{

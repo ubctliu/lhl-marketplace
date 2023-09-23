@@ -13,7 +13,8 @@ body {
 .favorited-listings {
   display: flex;
   align-items: center;
-  flex-direction: column;
+  flex-direction: row;
+  flex-wrap: wrap;
   gap: 10px;
   padding: 2em 1em;
   width: 100%;
@@ -27,12 +28,16 @@ body {
         transform: scale(1.05);
       }
     }
+    max-width: 1800;
+    margin-left: auto;
+    margin-right: auto;
     background-color: #F2F2F2;
     .fa-star {
+      color: #FFC800;
       &:hover {
         cursor: pointer;
         transform: scale(1.1);
-        color: #FFC800;
+        color: black;
       }
     }
   }
@@ -64,4 +69,8 @@ body {
       }
     }
   }
+}
+
+.black-star {
+  color: black;
 }

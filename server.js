@@ -46,6 +46,8 @@ const listingsRoutes = require('./routes/listings');
 const listingApiRoutes = require("./routes/listings-api");
 const postRoutes = require("./routes/postRoutes");
 const searchRoutes = require("./routes/searchRoutes");
+const messagesRoutes = require('./routes/messages');
+const messageApiRoutes = require('./routes/messages-api');
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
@@ -57,6 +59,9 @@ app.use('/listings', listingsRoutes);
 app.use("/api/listings", listingApiRoutes);
 app.use("/", postRoutes);
 app.use("/", searchRoutes);
+app.use('/messages', messagesRoutes);
+app.use('/api/messages', messageApiRoutes);
+
 // Note: mount other resources here, using the same pattern above
 
 // Home page

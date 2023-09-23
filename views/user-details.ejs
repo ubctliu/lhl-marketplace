@@ -41,18 +41,26 @@
         <!-- Right Column - Seller Info and Actions -->
         <div class="right-column">
             <h1>User Information</h1>
-            <h2>Name: <%= firstName %> <%= lastName %></h2>
+            <h2>Name: <%= searchedFirstName %> <%= searchedLastName %></h2>
             <p>Email Address: <%= email %></p>
             <p>Phone Number: <%= phoneNumber %></p>
             <p>User Type: <%= userType %></p>
             
             <!-- Buttons -->
-            <a href ="/api/users/messages">
+            <% if (userId === searchedUserId) { %>
+            <a href ="/users/messages">
                 <button class="btn btn-primary">My Messages</button>
             </a>
+            <% } else { %>
+                <a href ="/users/messages">
+                    <button class="btn btn-primary">Send a message</button>
+                </a>
+            <% } %>
+            <% if (userType === 'seller') { %>
             <a href ="/api/users/userlistings/new">
                 <button class="btn btn-success">New Listing</button>
             </a>
+            <% } %>
         </div>
     </div>
 </body>
