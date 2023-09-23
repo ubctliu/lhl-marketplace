@@ -7,15 +7,23 @@
 
 const express = require('express');
 const router  = express.Router();
-const { getMessageHistoryByUserId, getMessageHistoryByBothUserIds, getMessageHistoryByAllIds} = require('../db/queries/messages');
+const { getMessageHistoryByUserId, getMessageHistoryByBothUserIds, getMessageHistoryByAllIds } = require('../db/queries/messages');
+const { getListingById } = require('../db/queries/listings-queries');
 
-router.get('/chat-history/:userId/:sellerId/:chatId', (req, res) => {
-  const userId = req.params.userId;
-  const sellerId = req.params.sellerId;
-  const chatId = req.params.chatId;
-  getMessageHistoryByAllIds(userId, sellerId, chatId)
+
+router.get('/chat-history/:userId/:sellerId/:listingId', (req, res) => {
+  const userId = Number(req.params.userId);
+  const sellerId = Number(req.params.sellerId);
+  const listingId = Number(req.params.listingId);
+  getMessageHistoryByAllIds(userId, sellerId, listingId)
     .then((data) => {
-      res.json(data);
+      if (data.length === 0) {
+        getListingById(Number(listingId)).then((done) => {
+          res.json(done);
+        });
+      } else {
+        res.json(data);
+      }
     })
     .catch((err) => {
       console.error(err);

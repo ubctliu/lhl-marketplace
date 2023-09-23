@@ -32,6 +32,19 @@ router.get('/messages', (req, res) => {
   res.render('messages', templateVars);
 });
 
+// router.get('/new-messages/:sellerId/:listingId', (req, res) => {
+
+//   const templateVars = {
+//     userId: req.session.userId,
+//     firstName: req.session.firstName,
+//     lastName: req.session.lastName,
+//     sellerId: req.params.sellerId,
+//     listingId: req.params.listingId
+//   };
+//   res.status(200);
+//   res.render('messages', templateVars);
+// });
+
 router.get('/favorites', (req, res) => {
   const templateVars = {
     userId: req.session.userId,
@@ -137,7 +150,8 @@ router.get("/:id", (req, res) => {
           userType: data[0].user_type,
           userId: req.session.userId,
           firstName: req.session.firstName,
-          lastName: req.session.lastName
+          lastName: req.session.lastName,
+          listing: data
         };
         res.render("user-details", templateVars);
       }

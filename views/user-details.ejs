@@ -25,6 +25,7 @@
     <script defer src="/scripts/app.js"></script>
     <script defer src="/scripts/listings.js"></script>
     <script defer src="/scripts/users.js"></script>
+    <script defer src="/scripts/messages.js"></script>
 </head>
 <body>
     <%- include('partials/_nav') %>
@@ -50,15 +51,6 @@
             <% if (userId === searchedUserId) { %>
             <a href ="/users/messages">
                 <button class="btn btn-primary">My Messages</button>
-            </a>
-            <% } else { %>
-                <a href ="/users/messages">
-                    <button class="btn btn-primary">Send a message</button>
-                </a>
-            <% } %>
-            <% if (userType === 'seller') { %>
-            <a href ="/api/users/userlistings/new">
-                <button class="btn btn-success">New Listing</button>
             </a>
             <% } %>
         </div>

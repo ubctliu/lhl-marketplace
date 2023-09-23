@@ -32,6 +32,24 @@
     <ul class="chat-list">
     </ul>
   </div>
+  <% if (typeof chatHistoryExists !== 'undefined' && chatHistoryExists !== null) { %>
+  <span id="listing-data-carrier" 
+    data-chat-history="<%= chatHistoryExists %>"
+    data-seller-id="<%= sellerId %>"
+    data-listing-id="<%= listing.id %>"
+    data-user-id="<%= userId %>"
+    data-title="<%= listing.title %>"
+    data-description="<%= listing.description %>"
+    data-price="<%= listing.price %>"
+    data-category="<%= listing.category %>"
+    data-stock="<%= listing.stock %>"
+    data-is-featured="<%= listing.is_featured %>"
+    data-image-url="<%= listing.image_url %>"
+    data-is-deleted="<%= listing.is_deleted %>"
+    data-first-name="<%= listing.first_name %>"
+    data-last-name="<%= listing.last_name %>"
+    ></span>
+    <% } %>
   <section class="focused-chat-container">
   <section class="chat-title">
   </section>

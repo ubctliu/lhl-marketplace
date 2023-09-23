@@ -109,6 +109,7 @@ $(document).ready(() => {
     const listingId = Number($(this).attr("listing-id"));
     $.post("/users/favorites", { listingId });
   });
+  
   $(".listings").on("click", "img", function() {
     const listingId = $(this).closest(".listing").find(".fa-solid.fa-star").attr("listing-id");
     window.location.href = `/listings/${listingId}`;
