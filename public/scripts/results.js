@@ -11,20 +11,21 @@ const displayResults = (results) => {
   </div>
   </footer>
 </article>`;
-return $searchRes;
+  return $searchRes;
 };
 
 const renderRes = (results) => {
   for (const result of results) {
     const $res = displayResults(result);
-    $("#result-listings").prepend($res);
+    $(".result-listings").prepend($res);
   }
 };
 
 $(document).ready(() => {
-  $.get('/search')
+  const queryTerm = $('.result-listings').data('query-term');
+
+  $.get(`/api/results/${queryTerm}`)
     .done((results) => {
-      console.log(results);
       renderRes(results);
     });
 });
