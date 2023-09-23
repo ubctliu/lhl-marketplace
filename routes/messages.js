@@ -50,7 +50,8 @@ router.get('/send/:sellerId/:listingId', (req, res) => {
             sellerId: sellerId,
             listingId: listingId,
             chatHistoryExists: chatHistoryExists,
-            listing
+            listing,
+            user_type: req.session.userType
           };
           console.log(templateVars);
           res.render('messages', templateVars);

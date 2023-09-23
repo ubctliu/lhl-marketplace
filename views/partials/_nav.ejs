@@ -7,6 +7,9 @@
         <a href="/users/messages">My Messages</a>
       <a href="/users/favorites">My Favorites</a>
       <a href="/advsearch">Advanced Search</a>
+      <% if (user_type === 'seller') { %>
+        <a href="/post">Post New</a>
+        <% } %>
       <% } %>
     </div>
   </div>

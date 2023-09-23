@@ -8,7 +8,8 @@ router.get("/results/:query", (req, res) => {
     userId: req.session.userId,
     firstName: req.session.firstName,
     lastName: req.session.lastName,
-    queryTerm: req.params.query
+    queryTerm: req.params.query,
+    user_type: req.session.userType
   };
   res.render('results', templateVars);
 });
@@ -38,7 +39,13 @@ router.post("/search", (req, res) => {
 
 
 router.get("/advsearch", (req, res) => {
-  res.render('advSearch');
+  const templateVars = {
+    userId: req.session.userId,
+    firstName: req.session.firstName,
+    lastName: req.session.lastName,
+    user_type: req.session.userType
+  };
+  res.render('advSearch', templateVars);
 });
 
 router.post("/advsearch", (req, res) => {
