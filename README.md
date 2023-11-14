@@ -2,7 +2,7 @@ LHL Marketplace
 =========
 
 ## Screenshots
-!["Screenshot of desktop front-page"](./screenshots/desktop-frontpage.png)
+!["Screenshot of desktop front-page"](./screenshots/frontpage.png)
 !["Screenshot of login page"](./screenshots/login.png)
 !["Screenshot of messages page"](./screenshots/messages.png)
 
